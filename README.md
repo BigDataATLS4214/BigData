@@ -2,7 +2,7 @@
 
 ## Music recommended system based on facial recognition emotion.
 
-### MVP: Personalized music recommendation, using facial recommendation to choose a song to match that mood.
+### MVP: Personalized music recommendation, using facial recommendation to create a set of playlists that match the mood of the user.
 
 #### Plans for data-base:
 Mongo DB would be the best for storing
