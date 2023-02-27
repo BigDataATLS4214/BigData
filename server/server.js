@@ -24,7 +24,7 @@ const artistRouter = require('./routes/artists');
 const emotionRouter = require('./routes/emotions');
 
 app.use('/artists', artistRouter);
-app.use('/emotions', artistRouter);
+app.use('/emotions', emotionRouter);
 
  
 app.listen(port, () => {
