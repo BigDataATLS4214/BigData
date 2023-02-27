@@ -13,7 +13,7 @@ app.use(express.json());
 
 //connect to databse
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true,});
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true, dbName: "music_list"});
 const connection = mongoose.connection;
 connection.once('open', ()=>{
     console.log("MongoDB database connection established successfully");
@@ -21,8 +21,10 @@ connection.once('open', ()=>{
 
 //requiring and using the route files made
 const artistRouter = require('./routes/artists');
+const emotionRouter = require('./routes/emotions');
 
 app.use('/artists', artistRouter);
+app.use('/emotions', artistRouter);
 
  
 app.listen(port, () => {

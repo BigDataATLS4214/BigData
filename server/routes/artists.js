@@ -9,13 +9,13 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const name = req.body.name;
-    const num_of_songs = Number(req.body.num_of_songs);
-    const num_of_albums = Number(req.body.num_of_albums);
+    const number_of_songs = Number(req.body.num_of_songs);
+    const number_of_albums = Number(req.body.num_of_albums);
 
     const newArtist = new Artist({
         name,
-        num_of_albums,
-        num_of_songs,
+        number_of_songs,
+        number_of_albums,
     });
 
     newArtist.save()
