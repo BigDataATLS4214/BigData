@@ -19,6 +19,8 @@ First-timers, please follow the steps below:
 3. (optional) run ```sudo nmp install -g nodemon``` 
     - Nodemon just makes development easier and will automatically restart the server whenever the files are changed.
 
+4. create a file in the **server** folder called ```config.env``` this is where you'll store your ```ATLAS_URI``` and ```PORT``` number. To get the ```ATLAS_URI``` contact one of the team members. 
+
 To start the server:
 
 1. ```cd``` into the **server** folder
