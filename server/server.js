@@ -22,9 +22,11 @@ connection.once('open', ()=>{
 //requiring and using the route files made
 const artistRouter = require('./routes/artists');
 const emotionRouter = require('./routes/emotions');
+const genreRouter = require('./routes/genres');
 
 app.use('/artists', artistRouter);
 app.use('/emotions', emotionRouter);
+app.use('/genres', genreRouter);
 
  
 app.listen(port, () => {
