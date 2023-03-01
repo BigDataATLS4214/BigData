@@ -8,7 +8,13 @@
     padding-left: 2%;
     padding-right: 5%;
 }
-
+.container{
+    display:flex; /*changes the container into a flex box*/
+	flex-wrap:wrap; /*wrap, nowrap, wrap-reverse*/
+	flex-direction:row; /*row, row-reverse, column, column-reverse*/
+	align-content:flex-start; /*flex-start, flex-end, center, stretch, space-between, space around*/
+	align-items:stretch; /*flex-end, center, stretch, baseline*/
+}
 .clickLinks{
     background: none;
 	color: inherit;
@@ -23,6 +29,22 @@
 }
 .home{
     font-family: Caraque Regular Melted, cursive; 
+}
+.half-page-left{
+    justify-content: flex-start;
+    width: 56%;
+    padding: 2%;
+    margin: 2%;
+    .half-page-right{
+        justify-content: flex-end;
+    }
+
+}
+.songs-that-match{
+    font-family: Cooper Black, cursive;
+    font-size: 4vw;
+    text-align: left;
+    padding-top: 6vw;
 }
 
 .NavLinks{

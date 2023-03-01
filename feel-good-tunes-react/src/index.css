@@ -8,7 +8,12 @@ body {
 }
 @font-face {
   font-family: 'Caraque Regular Melted';
-  src: local('recoleta'), url(../src/fonts/Trial_caraque/TrialStaticFonts/Caraque_Trial_RgMelted.ttf) format('truetype');
+  src: local('caraque'), url(../src/fonts/Trial_caraque/TrialStaticFonts/Caraque_Trial_RgMelted.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Cooper Black';
+  src: local('cooper black'), url(../src/fonts/Cooper_Black_Regular/Cooper_Black_Regular.ttf) format('truetype');
 }
 
 code {
