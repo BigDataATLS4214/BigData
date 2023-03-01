@@ -1,0 +1,42 @@
+==Release notes for Caraque, Caraque VF==
+
+Compiler of release notes: Dalton Maag
+Designer: Dalton Maag
+Designer URL: daltonmaag.com
+
+Release date: 2020-11-24
+
+Change log:
+- v1.000: This is the first release.
+
+Basic information
+1 Font name:
+    Static: Caraque
+    Variable: Caraque VF
+2 TrueType Version record: 1.000
+3 Character set: Dalton Maag Library Set
+4 Supported scripts: Latin
+5 Number of glyphs:
+    - Static: 528
+    - Variable: 669
+6 Usage: Display
+7 Number of axes: 2
+8 Axes: 2
+    - Weight
+        tag: wght
+        range: 400 (Regular) - 900 (Black)
+    - Melt
+        tag: MELT
+        range: 1 (Solid) - 100 (Melted)
+9 Named instances: Regular Solid, Regular Melted, Medium Solid, Medium Melted, Bold Solid, Bold Melted, XBold Solid, XBold Melted, Black Solid, Black Melted.
+
+Technology
+1 File formats:
+    - Static: The files have been delivered in the TrueType-based OpenType format, for use in all major Operating Systems, and also as TTF for use in apps, and in web font format: WOFF; WOFF2.
+    - Variable: The files have been delivered as variable fonts in the TrueType-based OpenType format, for use in all major Operating Systems, and also as TTF for use in apps, and in web font format: WOFF2.
+2 Embedding settings: Editing of the document is allowed (editable mode); subsetting is allowed.
+3 Screen optimization information: PixelFix CTAA screen optimization technology.
+4 Default numerals: Tabular. Proportional numerals accessible via OpenType features.
+
+Other Information
+Solid is the default style for the Variable Font. The Melt axis enables the Melted style.

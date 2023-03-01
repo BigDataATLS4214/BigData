@@ -1,0 +1,42 @@
+.FullRow
+{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #949270;
+    padding-left: 2%;
+    padding-right: 5%;
+}
+
+.clickLinks{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 20px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    &:hover {
+        color: #534C6E;
+    }
+}
+.home{
+    font-family: Caraque Regular Melted, cursive; 
+}
+
+.NavLinks{
+    display: flex;
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 1.5vw;
+}
+
+.login-button{
+    display: flex;
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 1.5vw;
+    outline: black 5px 5px;
+    padding: 0px 20px ;
+    background-color: transparent;
+}
+
