@@ -13,8 +13,14 @@ export const Home = () => {
           <h2 className='songs-that-match'>SONGS THAT <br></br>MATCH YOUR MOOD</h2>
         </div>
         <div className='half-page-right'>
-          <img src = {profile} style = {resize} />
+          <img src = {profile} style = {resize} alt="ProfilePicture" />
         </div>
+
+        {/* PLAYLIST RESULTS COMPONENT */}
+        <div className='container'>
+        
+        </div>
+        {/* END PLAYLIST RESULTS COMPONENT END */}
       </div>
     );
   };
