@@ -1,5 +1,6 @@
 import React from 'react';
 import profile from '../img/profile-picture.png';
+import { PlaylistResults } from "../components/PlaylistResults";
 
 export const Home = () => {
   let resize = {
@@ -18,7 +19,7 @@ export const Home = () => {
 
         {/* PLAYLIST RESULTS COMPONENT */}
         <div className='container'>
-        
+           <PlaylistResults />
         </div>
         {/* END PLAYLIST RESULTS COMPONENT END */}
       </div>
