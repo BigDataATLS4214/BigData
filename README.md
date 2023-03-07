@@ -35,6 +35,32 @@ If everything was installed correctly, you should get the following message in y
 
 ----------------------------------------------------------
 
-#### Plans for Front-end:
-React
-Prototyping in Figma
+## Frontend
+
+First-timers, please follow the steps below:
+
+1. ```cd``` into the **feel-good-tunes-react** folder
+
+2. run ```npm install``` 
+
+To start the development server:
+
+1. ```cd``` into the **feel-good-tunes-react** folder
+
+2. run ```npm start ```
+
+If everything was installed correctly, you should get the following message in your terminal:
+  
+  ```Compiled successfully!```
+
+  ```You can now view feel-good-tunes-react in the browser.```
+
+  ```Local:            http://localhost:3000```
+
+  ```On Your Network:  http://10.0.0.160:3000```
+
+  ```Note that the development build is not optimized.```
+  
+  ```To create a production build, use npm run build.```
+
+  ```webpack compiled successfully```
