@@ -1,0 +1,46 @@
+.FullRow
+{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #949270;
+    padding-left: 2%;
+    padding-right: 5%;
+}
+
+.playlist-container{
+    display:flex; /*changes the container into a flex box*/
+	flex-wrap:wrap; /*wrap, nowrap, wrap-reverse*/
+	flex-direction:row; /*row, row-reverse, column, column-reverse*/
+	align-content:flex-start; /*flex-start, flex-end, center, stretch, space-between, space around*/
+	align-items:center; /*flex-end, center, stretch, baseline*/
+    width: 100%;
+}
+
+.playlist-item{
+    justify-content: center;
+    width: 29%;
+    padding: 2%;
+    margin: 2%;
+}
+
+.albumIMGContainer{
+    display: flex;
+    justify-content: center;
+}
+.albumIMG{
+    width: 100%;
+    border-radius: 16px;
+
+}
+
+.playlistName{
+    font-family: Cooper Black, cursive;
+    font-size: 2vw;
+}
+
+.songTitleAndAuthor{
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 1.5vw;
+}
