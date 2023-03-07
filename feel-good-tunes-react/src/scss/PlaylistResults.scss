@@ -25,6 +25,16 @@
     margin: 2%;
 }
 
+.albumIMGContainer{
+    display: flex;
+    justify-content: center;
+}
+.albumIMG{
+    width: 100%;
+    border-radius: 16px;
+
+}
+
 .playlistName{
     font-family: Cooper Black, cursive;
     font-size: 2vw;

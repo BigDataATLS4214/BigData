@@ -2,7 +2,9 @@ import React from 'react';
 
 import '../scss/PlaylistResults.scss';
 
-import playListData from '../mockJSONData/test.json';
+import playListData from '../mockJSONData/testPlaylists.json';
+
+import profile from '../img/testAlbumCoverArt.jpg';
 
 
 
@@ -13,8 +15,12 @@ export const PlaylistResults = () => {
         {
           playListData && playListData.results.map(playlist => {
             return(
-                <div className='playlist-item' key={playlist.name}>
 
+                <div className='playlist-item' key={playlist.name}>
+                    <div className='albumIMGContainer'>
+                      <img src = {profile}  className="albumIMG" alt="ProfilePicture" />
+                    </div>
+                
                   <div className='playlistName'>
                     {playlist.name}
                   </div>
