@@ -1,0 +1,59 @@
+.song-container{
+    display:flex; /*changes the container into a flex box*/
+	flex-wrap:wrap; /*wrap, nowrap, wrap-reverse*/
+	flex-direction:row; /*row, row-reverse, column, column-reverse*/
+	align-content:flex-start; /*flex-start, flex-end, center, stretch, space-between, space around*/
+	align-items:center; /*flex-end, center, stretch, baseline*/
+    width: 100%;
+    text-align: center;
+}
+.music-player{
+    display: block;
+    height: 50%;
+    text-align: center;
+    margin: 2vw;
+    margin-top: 2vw;
+    background-color: #949270;
+    border-radius: 43px;
+    .music-player-album{
+        display: inline-block;
+        width: 40%;
+        float: left;
+        margin: 1vw;
+        border-radius: 24px;
+    }
+    .music-player-controls{
+        display: inline-block;
+        width: 55%;
+        height: 50%;
+        float: right;
+        margin: 1vw;
+        border-radius: 43px;
+        background-color: #EDD8C5;
+    }
+
+    .music-player-detail-header{
+        font-family: Caraque Bold Solid, cursive;
+        text-align: left;
+        font-size: 36px;
+        margin: 1vw;
+    }
+    .music-player-details-text{
+        font-family: Caraque Regular Melted, cursive;
+        font-size: 20px;
+        text-align: left;
+        margin: 1vw;
+        margin-top: 1.6vw;
+    }
+    .music-player-button{
+        height: 50px;
+        width: 134px;
+        border-radius: 18px;
+        float: left;
+        margin: 1vw;
+    }
+}
+.img-inside-button{
+    width: 20%;
+    margin-left: 1vw;
+}

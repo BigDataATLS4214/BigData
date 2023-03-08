@@ -10,6 +10,10 @@ body {
   font-family: 'Caraque Regular Melted';
   src: local('caraque'), url(../src/fonts/Trial_caraque/TrialStaticFonts/Caraque_Trial_RgMelted.ttf) format('truetype');
 }
+@font-face {
+  font-family: 'Caraque Bold Solid';
+  src: local('craque'), url(../src/fonts/Trial_caraque/TrialStaticFonts/Caraque_Trial_BdSolid.ttf) format('truetype');
+}
 
 @font-face {
   font-family: 'Cooper Black';

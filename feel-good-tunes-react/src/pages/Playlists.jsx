@@ -1,5 +1,8 @@
 import React from 'react';
+import { SongListener } from '../components/SongListener';
 
 export const Playlists = () => {
-    return <h1>Here are your playlists</h1>;
+    return(
+      <SongListener />
+    )
   };
