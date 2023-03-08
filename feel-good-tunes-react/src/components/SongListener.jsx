@@ -16,7 +16,7 @@ export const SongListener = () => {
                     <p className='music-player-details-text'>10 Artists</p>
                     <p className='music-player-details-text'>10 Songs</p>
                     <p className='music-player-details-text'>0h 48mins</p>
-                    <button className = 'music-player-button'>Play<img className = 'img-inside-button'src = {playButton}/></button>
+                    <button className = 'music-player-button'>Play<img className = 'img-inside-button' alt = "play-button" src = {playButton}/></button>
                 </div>
             </div>
         </div>
