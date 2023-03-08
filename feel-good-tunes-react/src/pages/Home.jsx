@@ -1,6 +1,7 @@
 import React from 'react';
 import profile from '../img/profile-picture.png';
 import { PlaylistResults } from "../components/PlaylistResults";
+import '../scss/Home.scss';
 
 export const Home = () => {
   let resize = {
@@ -16,6 +17,7 @@ export const Home = () => {
         <div className='half-page-right'>
           <img src = {profile} style = {resize} alt="ProfilePicture" />
         </div>
+        <button className='scan-mood-button'>Scan Mood</button>
 
         {/* PLAYLIST RESULTS COMPONENT */}
         <div className='container'>
