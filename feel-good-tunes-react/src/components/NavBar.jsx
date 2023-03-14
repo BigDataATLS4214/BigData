@@ -12,7 +12,7 @@ export const NavBar = ({ setPage }) => {
             <button className="clickLinks" onClick={() => setPage('home')}>Home</button>
             <button className="clickLinks" onClick={() => setPage('playlists')}>Playlists</button>
           </div>
-          <button className="login-button" onClick={() => setPage('playlists')}>Login</button>
+          <div className="navPlaceHolder"></div>
       </div>
     );
   };
