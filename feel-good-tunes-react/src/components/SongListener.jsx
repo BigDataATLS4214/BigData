@@ -9,12 +9,12 @@ import playListData from '../mockJSONData/testPlaylists.json';
 import playButton from '../img/player-play.png';
 
 
-function durationCalculator(currentPlaylist){
+function playlistDurationCalculator(currentPlaylist){
     let totalMinutes = 0;
     let totalHours = 0;
     let totalSeconds = 0;
-    playListData.results[currentPlaylist].tracks.forEach(element => {
-        const tmp = element.song.duration.toString().split(":")
+    playListData.results[currentPlaylist].tracks.forEach(trackElement => {
+        const tmp = trackElement.song.duration.toString().split(":")
         totalSeconds = totalSeconds + (+tmp[2]);
         if( totalSeconds >= 60)
         {
@@ -36,10 +36,10 @@ function durationCalculator(currentPlaylist){
 export const SongListener = () => {
     //Currently just pulling from json will need to pull from API every time a new playlist is clicked
     let songsAndArtists = playListData.results[0].tracks.length;
-    let playlistDuration = durationCalculator(0);
 
-    //need to add all of the songs durations... We may have this done in back end and already stored.
-    //May be something in spotify api we can hit to get the duration
+    //Need to add all of the songs durations... We may have this done in back end and already stored.
+    //May also just be something in the api we can utilize to get the duration
+    let playlistDuration = playlistDurationCalculator(0);
     
 
     return(
