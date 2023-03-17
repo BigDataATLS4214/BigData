@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -10,19 +11,19 @@ const songTitleSchema = new Schema({
         trim: true
     },
     artists: {
-        type: Array,
+        type: [ObjectId],
         required: true
     },
     genres: {
-        type: Array,
+        type: [ObjectId],
         required: true
     },
     albums:{ 
-        type: Array,
+        type: [ObjectId],
         requried: true
     },
     emotions:{
-        type: Array,
+        type: [ObjectId],
         requried: true
     }
 }, {
