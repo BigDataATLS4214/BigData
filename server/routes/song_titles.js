@@ -1,9 +1,15 @@
 const router = require('express').Router();
-let SongTitle = require('../models/song_title.model');
+let SongTitle = require('../models/song_titles.model');
 
 router.route('/').get((req, res) => {
     SongTitle.find()
         .then(song_titles => res.json(song_titles))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/:id').get((req, res) => {
+    SongTitle.findById(req.params.id)
+        .then(song_title => res.json(song_title))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
