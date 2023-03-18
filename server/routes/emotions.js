@@ -13,6 +13,12 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:name').get((req, res) => {
+    Emotion.findOne({name: req.params.name})
+        .then(emotion => res.json(emotion))
+        .catch(err => res.status(400).json('ErrorL ' + err));
+});
+
 router.route('/add').post((req, res) => {
     const name = req.body.name;
 
