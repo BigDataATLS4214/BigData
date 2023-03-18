@@ -30,6 +30,6 @@ const songTitleSchema = new Schema({
     timestamps: true,
 });
 
-const SongTitles = mongoose.model('SongTitle', songTitleSchema);
+const SongTitle = mongoose.model('SongTitle', songTitleSchema);
 
-module.exports = SongTitles;
+module.exports = SongTitle;
