@@ -11,9 +11,19 @@ def main():
         temp = line.strip().split("<SEP>")
         # TODO: use spotify api to look up how many songs and albums the artist has
         artist_id = insert_artist(temp[0])
-        # TODO: find the genre(s), album(s), and emotion(s) the song belongs to
+        # TODO: use spotify api to find the genre(s), album(s), and emotion(s) the song belongs to
+                # then add them to db and get back resulting id to put into song_title 
         insert_song(temp[1], artist_id)
     
+
+# def insert_genre(genre):
+#     return 
+
+# def insert_album(album):
+#     return
+
+# def insert_emotion(emotion):
+#     return
 
 def insert_artist(artist):
     artists_col = DB["artists"]
