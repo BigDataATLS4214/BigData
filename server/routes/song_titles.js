@@ -13,6 +13,12 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:emotion_id').get((req, res) => {
+    SongTitle.find({emotion: req.params.emotion_id})
+        .then(song_title => res.json(song_title))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
 router.route('/add').post((req, res) => {
     const title = req.body.title;
     const artists = req.body.artists;
