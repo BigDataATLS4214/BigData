@@ -1,0 +1,30 @@
+.container{
+    display:flex; /*changes the container into a flex box*/
+	flex-wrap:wrap; /*wrap, nowrap, wrap-reverse*/
+	flex-direction:row; /*row, row-reverse, column, column-reverse*/
+	align-content:flex-start; /*flex-start, flex-end, center, stretch, space-between, space around*/
+	align-items:stretch; /*flex-end, center, stretch, baseline*/
+}
+.center{
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+    text-align: center;
+}
+.header-font{
+    font-family: Caraque Regular Melted, cursive; 
+}
+.capture-photo-button{
+    display:block;
+    margin:0 auto;
+    width: 200px;
+    height: 70px;
+    background: rgba(163, 101, 109, 0.5);
+    box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 25px;
+    &:hover{
+        background: rgba(133, 78, 87, 0.5);
+    }
+    margin-bottom: 1vw;;
+}

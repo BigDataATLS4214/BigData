@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import profile from '../img/profile-picture.png';
 import { PlaylistResults } from "../components/PlaylistResults";
+import { withRouter } from "react-router";
 import '../scss/Home.scss';
 
-export const Home = () => {
+export const Home = ({ setCamState, setPage }) => {
   let resize = {
     float: 'right',
     width: '80%',
     paddingTop: '6vw',
+  }
+  const renderOnlyCam = () => {
+    setCamState(true);
+    setPage('');
   }
     return(
       <div className='container'>
@@ -17,7 +22,7 @@ export const Home = () => {
         <div className='half-page-right'>
           <img src = {profile} style = {resize} alt="ProfilePicture" />
         </div>
-        <button className='scan-mood-button'>Scan Mood</button>
+        <button onClick = {() => renderOnlyCam()} className='scan-mood-button'>Scan Mood</button>
 
         {/* PLAYLIST RESULTS COMPONENT */}
         <div className='container'>
