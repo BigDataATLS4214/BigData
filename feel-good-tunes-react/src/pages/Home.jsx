@@ -5,11 +5,7 @@ import { withRouter } from "react-router";
 import '../scss/Home.scss';
 
 export const Home = ({ setCamState, setPage }) => {
-  let resize = {
-    float: 'right',
-    width: '80%',
-    paddingTop: '6vw',
-  }
+
   const renderOnlyCam = () => {
     setCamState(true);
     setPage('');
@@ -20,7 +16,7 @@ export const Home = ({ setCamState, setPage }) => {
           <h2 className='songs-that-match'>SONGS THAT <br></br>MATCH YOUR MOOD</h2>
         </div>
         <div className='half-page-right'>
-          <img src = {profile} style = {resize} alt="ProfilePicture" />
+          <img src = {profile} id="profileImage" alt="ProfilePicture" />
         </div>
         <button onClick = {() => renderOnlyCam()} className='scan-mood-button'>Scan Mood</button>
 
