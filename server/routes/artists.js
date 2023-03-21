@@ -7,6 +7,12 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').get((req, res) => {
+    Artist.findById(req.params.id)
+        .then(artist => res.json(artist))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
     const name = req.body.name;
     const number_of_songs = Number(req.body.num_of_songs);
