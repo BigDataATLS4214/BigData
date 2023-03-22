@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import profile from '../img/profile-picture.png';
 import { PlaylistResults } from "../components/PlaylistResults";
+import {SpotifyConnect} from "../components/SpotifyConnect";
 import { withRouter } from "react-router";
+
+import axios from "axios";
+
 import '../scss/Home.scss';
 
 export const Home = ({ setCamState, setPage }) => {
@@ -25,6 +29,11 @@ export const Home = ({ setCamState, setPage }) => {
            <PlaylistResults />
         </div>
         {/* END PLAYLIST RESULTS COMPONENT END */}
+
+        {/* Spotify AUTHENTICATION AND TESTING */}
+        <SpotifyConnect />
+        {/* Spotify AUTHENTICATION AND TESTING END */}
+
       </div>
     );
   };
