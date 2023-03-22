@@ -8,14 +8,6 @@ const artistSchema = new Schema({
         required: true,
         unique: true,
         trim: true
-    },
-    number_of_songs: {
-        type: Number,
-        required: true
-    },
-    number_of_albums: {
-        type: Number,
-        required: true
     }
 }, {
     timestamps: true,
