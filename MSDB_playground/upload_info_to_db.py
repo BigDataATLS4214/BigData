@@ -9,7 +9,6 @@ def main():
     lines = file.readlines()
     for line in lines:
         temp = line.strip().split("<SEP>")
-        # TODO: use spotify api to look up how many songs and albums the artist has
         artist_id = insert_artist(temp[0])
         # TODO: use spotify api to find the genre(s), album(s), and emotion(s) the song belongs to
                 # then add them to db and get back resulting id to put into song_title 

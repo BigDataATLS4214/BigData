@@ -16,13 +16,11 @@ router.route('/:id').get((req, res) => {
 router.route('/add').post((req, res) => {
     const title = req.body.title;
     const release_date = Date(req.body.release_date);
-    const number_of_tracks = Number(req.body.num_of_tracks);
     const artists = req.body.artists; //should be an array of object ids
 
     const newAlbum = new Album({
        title,
        release_date,
-       number_of_tracks,
        artists
     });
 
