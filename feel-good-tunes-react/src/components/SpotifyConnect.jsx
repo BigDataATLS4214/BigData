@@ -49,7 +49,6 @@ export const SpotifyConnect = () => {
     })
     console.log(data)
     setArtists(data.artists.items)
-    
   }
   // Spotify API CONNECTION END
 
