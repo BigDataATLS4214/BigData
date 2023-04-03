@@ -14,10 +14,6 @@ const albumSchema = new Schema({
         type: Date,
         required: true
     },
-    number_of_tracks: {
-        type: Number,
-        required: true
-    },
     artists:{ 
         type: [ObjectId],
         requried: true
