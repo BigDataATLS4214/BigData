@@ -31,7 +31,7 @@ export const Home = ({ setCamState, setPage }) => {
         {/* END PLAYLIST RESULTS COMPONENT END */}
 
         {/* Spotify AUTHENTICATION AND TESTING */}
-        <SpotifyConnect />
+         <SpotifyConnect />
         {/* Spotify AUTHENTICATION AND TESTING END */}
 
       </div>

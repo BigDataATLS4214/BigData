@@ -9,7 +9,7 @@ import SpotifyPlayer from 'react-spotify-web-playback';
 
 import '../scss/Home.scss';
 
-export const SpotifyConnect = () => {
+export const SpotifyConnect = ( {setAccessToken} ) => {
 
   // Spotify API CONNECTION
   const CLIENT_ID = "299b99d63f61494e86ebc0716e207405";
@@ -30,6 +30,7 @@ export const SpotifyConnect = () => {
       window.location.hash = ""
       window.localStorage.setItem("token", token)
       setToken(token);
+      setAccessToken(token);
     }
   }, [])
 
@@ -38,31 +39,31 @@ export const SpotifyConnect = () => {
     window.localStorage.removeItem("token");
   }
 
-  const searchArtists = async (e) =>{
-    e.preventDefault()
-    const {data} = await axios.get("https://api.spotify.com/v1/search", {
-      headers:{
-        Authorization: `Bearer ${token}`
-      },
-      params:{
-        q: searchKey,
-        type: "artist"
-      }
-    })
-    console.log(data)
-    setArtists(data.artists.items)
-  }
-  // Spotify API CONNECTION END
+  // const searchArtists = async (e) =>{
+  //   e.preventDefault()
+  //   const {data} = await axios.get("https://api.spotify.com/v1/search", {
+  //     headers:{
+  //       Authorization: `Bearer ${token}`
+  //     },
+  //     params:{
+  //       q: searchKey,
+  //       type: "artist"
+  //     }
+  //   })
+  //   console.log(data)
+  //   setArtists(data.artists.items)
+  // }
+  // // Spotify API CONNECTION END
 
 
-  const renderArtists = () => {
-    return artists.map(artist => (
-        <div key={artist.id}>
-            {artist.images.length ? <img width={"100%"} src={artist.images[0].url} alt="artist" /> : <div> No Image </div>}
-            {artist.name}
-        </div>
-    ))
-  }
+  // const renderArtists = () => {
+  //   return artists.map(artist => (
+  //       <div key={artist.id}>
+  //           {artist.images.length ? <img width={"100%"} src={artist.images[0].url} alt="artist" /> : <div> No Image </div>}
+  //           {artist.name}
+  //       </div>
+  //   ))
+  // }
 
     return(
       <div className='container'>
@@ -74,29 +75,20 @@ export const SpotifyConnect = () => {
         {/* Spotify AUTHENTICATION END*/}
 
         {/* SPOTIFY FORM */}
-        {token ?
+        {/* {token ?
           <form onSubmit={searchArtists}>
             <input type="text" onChange={e => setSearchKey(e.target.value)} />
             <button type={"submit"}> Search </button>
           </form>
           :
           <h2>Please login</h2>
-        }
+        } */}
         {/* Spotify FORM END */}
-        {artists ? 
+        {/* {artists ? 
             renderArtists()
             : 
             <h2>Search For an artist</h2>
-        }
-
-        {token ?
-          <SpotifyPlayer
-          token = {`${token}`}
-          uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
-          />
-          :
-          <h2>Please login</h2>
-        }
+        } */}
       </div>
     );
   };
