@@ -5,6 +5,8 @@ import { withRouter } from "react-router";
 
 import axios from "axios";
 
+import SpotifyPlayer from 'react-spotify-web-playback';
+
 import '../scss/Home.scss';
 
 export const SpotifyConnect = () => {
@@ -21,7 +23,7 @@ export const SpotifyConnect = () => {
 
   useEffect(() => {
     const hash = window.location.hash;
-
+    console.log(hash);
     if(hash){
       let token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
       console.log(token);
@@ -56,7 +58,7 @@ export const SpotifyConnect = () => {
   const renderArtists = () => {
     return artists.map(artist => (
         <div key={artist.id}>
-            {artist.images.length ? <img width={"100%"} src={artist.images[0].url} alt="artist Photo" /> : <div> No Image </div>}
+            {artist.images.length ? <img width={"100%"} src={artist.images[0].url} alt="artist" /> : <div> No Image </div>}
             {artist.name}
         </div>
     ))
@@ -66,19 +68,18 @@ export const SpotifyConnect = () => {
       <div className='container'>
         {/* Spotify AUTHENTICATION */}
         {!token ? 
-          <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}> Login to Spotify </a>
+          <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state`}> Login to Spotify </a>
           : 
           <button onClick={logout}>Logout</button>}
         {/* Spotify AUTHENTICATION END*/}
 
         {/* SPOTIFY FORM */}
-        { token?
+        {token ?
           <form onSubmit={searchArtists}>
             <input type="text" onChange={e => setSearchKey(e.target.value)} />
             <button type={"submit"}> Search </button>
           </form>
           :
-
           <h2>Please login</h2>
         }
         {/* Spotify FORM END */}
@@ -86,6 +87,15 @@ export const SpotifyConnect = () => {
             renderArtists()
             : 
             <h2>Search For an artist</h2>
+        }
+
+        {token ?
+          <SpotifyPlayer
+          token = {`${token}`}
+          uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
+          />
+          :
+          <h2>Please login</h2>
         }
       </div>
     );
