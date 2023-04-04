@@ -7,10 +7,11 @@ import axios from "axios";
 
 
 
-export const PlaylistResults = () => {
+export const PlaylistResults = ({playlistResults}) => {
 
   return (
-    <div className='playlist-container'>
+    <div>
+    {/* <div className='playlist-container'>
       {
         playListData && playListData.results.map(playlist => {
           return (
@@ -33,6 +34,27 @@ export const PlaylistResults = () => {
             </div>
           )
         })}
+    </div> */}
+
+    <div className='playlist-container'>
+      <h2>TESTING PULLING STRAIGHT FROM SPOTIFY</h2>
+    {
+      playlistResults.map(playlist => {
+        return (
+          <div className='playlist-item' key={playlist.name}>
+            <div className='albumIMGContainer'>
+              <img src={playlist.images[0].url} className="albumIMG" alt="ProfilePicture" />
+            </div>
+            <div className='playlistName'>
+                {playlist.name}
+            </div>
+            <div className='songTitleAndAuthor'>
+            {playlist.tracks.total} Total Songs
+            </div>
+          </div>
+        )
+      })}
+    </div>
     </div>
   );
 };

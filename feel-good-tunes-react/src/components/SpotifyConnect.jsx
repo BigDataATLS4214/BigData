@@ -5,11 +5,10 @@ import { withRouter } from "react-router";
 
 import axios from "axios";
 
-import SpotifyPlayer from 'react-spotify-web-playback';
 
 import '../scss/Home.scss';
 
-export const SpotifyConnect = ( {setAccessToken} ) => {
+export const SpotifyConnect = ( {setSessionToken} ) => {
 
   // Spotify API CONNECTION
   const CLIENT_ID = "299b99d63f61494e86ebc0716e207405";
@@ -30,7 +29,7 @@ export const SpotifyConnect = ( {setAccessToken} ) => {
       window.location.hash = ""
       window.localStorage.setItem("token", token)
       setToken(token);
-      setAccessToken(token);
+      setSessionToken(token);
     }
   }, [])
 

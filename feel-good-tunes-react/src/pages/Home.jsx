@@ -25,9 +25,9 @@ export const Home = ({ setCamState, setPage }) => {
         <button onClick = {() => renderOnlyCam()} className='scan-mood-button'>Scan Mood</button>
 
         {/* PLAYLIST RESULTS COMPONENT */}
-        <div className='container'>
+        {/* <div className='container'>
            <PlaylistResults />
-        </div>
+        </div> */}
         {/* END PLAYLIST RESULTS COMPONENT END */}
 
         {/* Spotify AUTHENTICATION AND TESTING */}

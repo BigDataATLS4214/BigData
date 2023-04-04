@@ -4,29 +4,33 @@
 	flex-direction:row; /*row, row-reverse, column, column-reverse*/
 	align-content:flex-start; /*flex-start, flex-end, center, stretch, space-between, space around*/
 	align-items:center; /*flex-end, center, stretch, baseline*/
+    justify-content: center;
     width: 100%;
     text-align: center;
 }
+
+
 .music-player{
-    display: block;
+    display: flex;
     height: 50%;
     text-align: center;
     margin: 2vw;
     margin-top: 2vw;
     background-color: #949270;
     border-radius: 43px;
+    align-items: center;
+    justify-content: center;
     .music-player-album{
-        display: inline-block;
-        width: 40%;
-        float: left;
+        display: row;
+        max-width: 20%;
+        max-height: 20%;
         margin: 1vw;
         border-radius: 24px;
     }
     .music-player-controls{
-        display: inline-block;
-        width: 55%;
-        height: 50%;
-        float: right;
+        display: row;
+        width: 95%;
+        max-height: 90%;
         margin: 1vw;
         border-radius: 43px;
         background-color: #EDD8C5;
