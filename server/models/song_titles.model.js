@@ -10,18 +10,6 @@ const songTitleSchema = new Schema({
         unique: true,
         trim: true
     },
-    artists: {
-        type: [ObjectId],
-        required: true
-    },
-    genres: {
-        type: [ObjectId],
-        required: true
-    },
-    albums:{ 
-        type: [ObjectId],
-        requried: true
-    },
     emotions:{
         type: [ObjectId],
         requried: true
