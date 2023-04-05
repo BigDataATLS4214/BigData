@@ -21,10 +21,12 @@ router.route('/:emotion_id').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const title = req.body.title;
+    const artist = req.boby.artist;
     const emotions = req.body.emotions;
      
     const newSongTitle = new SongTitle({
        title,
+       artist,
        emotions
     });
 
