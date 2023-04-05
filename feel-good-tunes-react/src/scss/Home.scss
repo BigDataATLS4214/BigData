@@ -24,6 +24,19 @@
     text-align: left;
     padding-top: 6vw;
 }
+.checkout-emotions{
+    display:block;
+    margin-bottom: 4%;
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 3vw;
+    text-align: center;
+}
+.emotion-caption{
+    display: flex;
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 2vw;
+    flex-direction: column;
+}
 .scan-mood-button{
     display: block;
     width: 250px;
@@ -36,6 +49,23 @@
     &:hover{
         background: rgba(133, 78, 87, 0.5);
     }
+}
+.emotions{
+    display: inline;
+    margin-top: 5%;
+}
+.emotion-plus-caption{
+    display: inline;
+    text-align: center;
+}
+.emotions-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.icon-size{
+    width: 40%;
 }
 
 #profileImage{
