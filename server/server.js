@@ -20,16 +20,10 @@ connection.once('open', ()=>{
 })
 
 //requiring and using the route files made
-const artistRouter = require('./routes/artists');
 const emotionRouter = require('./routes/emotions');
-const genreRouter = require('./routes/genres');
-const albumRouter = require('./routes/albums');
 const songTitleRouter = require('./routes/song_titles');
 
-app.use('/artists', artistRouter);
 app.use('/emotions', emotionRouter);
-app.use('/genres', genreRouter);
-app.use('/albums', albumRouter);
 app.use('/song_titles', songTitleRouter);
 
  
