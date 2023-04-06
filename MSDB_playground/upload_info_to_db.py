@@ -12,7 +12,7 @@ import json
 
 #I SHOULD PROBABLY HIDE THESE
 cid = "5d3513e3cd004a6ea6d5fd243247275c"
-secret = "540ce35cc89349948dbb8303d7647e29"
+secret = ""
 
 #USING SPOTIPY TO AUTHENTICATE
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
@@ -58,11 +58,6 @@ if valence > 0.6 and energy > 0.5:
     print("SURPRISED!")
 if valence > 0.4 and valence < 0.7 and instrumentalness > 0.7:
     print("NEUTRAL")
-
-
-
-
-
 
 
 
