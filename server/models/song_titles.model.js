@@ -7,20 +7,10 @@ const songTitleSchema = new Schema({
     title: {
         type: String,
         required: true,
-        unique: true,
-        trim: true
     },
-    artists: {
-        type: [ObjectId],
+    artist:{
+        type: String,
         required: true
-    },
-    genres: {
-        type: [ObjectId],
-        required: true
-    },
-    albums:{ 
-        type: [ObjectId],
-        requried: true
     },
     emotions:{
         type: [ObjectId],
