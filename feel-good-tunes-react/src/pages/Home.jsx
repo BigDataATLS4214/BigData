@@ -31,19 +31,19 @@ export const Home = ({ setCamState, setPage }) => {
           <h2 className='checkout-emotions'>Wanna check out a different playlist? Click on an emotion below!</h2>
           <div className = 'emotions-row'>
             <div className='emotion-plus-caption'>
-              <img src = {happy} className='icon-size'/>
+              <img src = {happy} className='icon-size' alt="Happy Icon"/>
               <p className = 'emotion-caption'>Happy</p>
             </div>
             <div className='emotion-plus-caption'>
-              <img src = {sad} className='icon-size' />
+              <img src = {sad} className='icon-size' alt="Sad Icon"/>
               <p className='emotion-caption'>Sad</p>
             </div>
             <div className='emotion-plus-caption'>
-              <img src = {angry} className='icon-size' />
+              <img src = {angry} className='icon-size' alt="Angry Icon"/>
               <p className='emotion-caption'>Angry</p>
             </div>
             <div className='emotion-plus-caption'>
-              <img src = {surprise} className='icon-size' /> 
+              <img src = {surprise} className='icon-size' alt="Surprised Icon" /> 
               <p className='emotion-caption'>Surprised</p>
             </div>
           </div>
