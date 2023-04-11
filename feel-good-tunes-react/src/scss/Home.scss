@@ -1,34 +1,57 @@
-.container{
-    display:flex; /*changes the container into a flex box*/
-	flex-wrap:wrap; /*wrap, nowrap, wrap-reverse*/
-	flex-direction:row; /*row, row-reverse, column, column-reverse*/
-	align-content:flex-start; /*flex-start, flex-end, center, stretch, space-between, space around*/
-	align-items:stretch; /*flex-end, center, stretch, baseline*/
+.home-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
 }
+
 .home{
     font-family: Caraque Regular Melted, cursive; 
 }
 .half-page-left{
-    justify-content: flex-start;
-    width: 56%;
-    padding: 2%;
+    display: flex;
+    width: 46%;
+    padding-left: 4%;
     margin: 2%;
-    .half-page-right{
-        justify-content: flex-end;
-    }
-
+    margin-right: 0%;
+    align-items: center;
+    justify-content: center;
+}
+.half-page-right{
+    display: flex;
+    width: 46%;
+    padding: 0%;
+    margin: 2%;
+    align-items: center;
+    justify-content: center;
 }
 .songs-that-match{
     font-family: Cooper Black, cursive;
     font-size: 4vw;
     text-align: left;
-    padding-top: 6vw;
+    padding-top: 2vw;
 }
 .checkout-emotions{
-    display:block;
+    display:flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 4%;
     font-family: Caraque Regular Melted, cursive;
     font-size: 3vw;
+    text-align: center;
+}
+
+.say-emotions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4%;
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 2vw;
     text-align: center;
 }
 .emotion-caption{
@@ -38,7 +61,9 @@
     flex-direction: column;
 }
 .scan-mood-button{
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 250px;
     height: 80px;
     margin-left: 5vw;
@@ -71,5 +96,11 @@
 #profileImage{
     float: right;
     width: 80%;
-    padding-top: 6vw;
+    max-width: 50%;
+    padding-top: 2vw;
+}
+
+.button-icon-size{
+    width: 10%;
+    padding-left: 1%;
 }
