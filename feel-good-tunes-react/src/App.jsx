@@ -9,6 +9,7 @@ import { Cam } from './pages/Cam';
 
 function App() {
   const [page, setPage] = useState('home');
+  const [emotion, setEmotion] = useState("");
   const [camState, setCamState] = useState(false);
   const [sessionToken, setSessionToken] = useState("");
 
@@ -16,8 +17,8 @@ function App() {
     <div>
       {(sessionToken !== "" && page !== 'spotifyConnect') ? <NavBar setPage={setPage} setCamState={setCamState} /> : null}
       {sessionToken === "" ? <SpotifyConnect setSessionToken={setSessionToken}/> : null}
-      {(sessionToken !== "" && page === 'home') ? <Home setCamState={setCamState} setPage={setPage} /> : null}
-      {(sessionToken !== "" && page === 'playlists') ? <Playlists sessionToken={sessionToken} /> : null}
+      {(sessionToken !== "" && page === 'home') ? <Home setCamState={setCamState} setPage={setPage} setEmotion={setEmotion}/> : null}
+      {(sessionToken !== "" && page === 'playlists') ? <Playlists sessionToken={sessionToken} emotion = {emotion}/> : null}
       {camState ? <Cam /> : null}
     </div>
   );

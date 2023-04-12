@@ -14,7 +14,16 @@ import axios from "axios";
 
 import '../scss/Home.scss';
 
-export const Home = ({ setCamState, setPage }) => {
+export const Home = ({ setCamState, setPage, setEmotion}) => {
+
+  //GET A PLAYLIST FROM SPOTIFY
+  const goToPlaylists = event =>{
+    setEmotion(event.currentTarget.id)
+    setPage('playlists')
+    console.log(typeof event.currentTarget.id)
+    console.log(event.currentTarget.id);
+  }
+
 
   const renderOnlyCam = () => {
     setCamState(true);
@@ -38,33 +47,31 @@ export const Home = ({ setCamState, setPage }) => {
           <h2 className='checkout-emotions'>Wanna check out a different playlist? Click on an emotion below!</h2>
           <div className = 'emotions-row'>
             <div className='emotion-plus-caption'>
-              <img src = {happy} className='icon-size' alt="Happy Icon"/>
+              <button id = 'happy' className = 'emotion-button' onClick = {goToPlaylists}>
+                <img src = {happy} className='icon-size' alt="Happy Icon"/>
+              </button>
               <p className = 'emotion-caption'>Happy</p>
             </div>
             <div className='emotion-plus-caption'>
-              <img src = {sad} className='icon-size' alt="Sad Icon"/>
+              <button id = 'sad' className = 'emotion-button' onClick = {goToPlaylists}>
+                <img src = {sad} className='icon-size' alt="Sad Icon"/>
+              </button>
               <p className='emotion-caption'>Sad</p>
             </div>
             <div className='emotion-plus-caption'>
-              <img src = {angry} className='icon-size' alt="Angry Icon"/>
+              <button id = 'angry' className = 'emotion-button' onClick = {goToPlaylists}>
+                <img src = {angry} className='icon-size' alt="Angry Icon"/>
+              </button>
               <p className='emotion-caption'>Angry</p>
             </div>
             <div className='emotion-plus-caption'>
-              <img src = {surprise} className='icon-size' alt="Surprised Icon" /> 
+              <button id = 'surprise' className = 'emotion-button' onClick = {goToPlaylists}>
+                <img src = {surprise} className='icon-size' alt="Surprised Icon" /> 
+              </button>
               <p className='emotion-caption'>Surprised</p>
             </div>
           </div>
         </div>
-
-        {/* PLAYLIST RESULTS COMPONENT */}
-        {/* <div className='container'>
-           <PlaylistResults />
-        </div> */}
-        {/* END PLAYLIST RESULTS COMPONENT END */}
-
-        {/* Spotify AUTHENTICATION AND TESTING */}
-        {/* Spotify AUTHENTICATION AND TESTING END */}
-
       </div>
     );
   };
