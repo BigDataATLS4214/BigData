@@ -4,23 +4,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const songTitleSchema = new Schema({
-    title: {
+    spotify_id:{
         type: String,
-        required: true,
-        unique: true,
-        trim: true
-    },
-    artists: {
-        type: [ObjectId],
         required: true
-    },
-    genres: {
-        type: [ObjectId],
-        required: true
-    },
-    albums:{ 
-        type: [ObjectId],
-        requried: true
     },
     emotions:{
         type: [ObjectId],
