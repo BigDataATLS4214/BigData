@@ -16,10 +16,12 @@ router.route('/:id').get((req, res) => {
 router.route('/add').post((req, res) => {
     const name = req.body.name;
     const spotify_id = req.body.spotify_id;
+    const emotion_id = req.body.emotion_id;
      
     const newPlaylistId = new PlaylistId({
        name,
-       spotify_id
+       spotify_id,
+       emotion_id
     });
 
     newPlaylistId.save()
