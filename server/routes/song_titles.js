@@ -20,18 +20,11 @@ router.route('/:emotion_id').get((req, res) => {
 })
 
 router.route('/add').post((req, res) => {
-    const title = req.body.title;
-    const artists = req.body.artists;
-    const genres = req.body.genres;
-    const albums = req.body.albums;
+    const spotify_id = req.body.spotify_id
     const emotions = req.body.emotions;
      
-
     const newSongTitle = new SongTitle({
-       title,
-       artists,
-       genres,
-       albums,
+       spotify_id,
        emotions
     });
 
