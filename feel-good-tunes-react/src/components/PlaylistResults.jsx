@@ -35,15 +35,15 @@ export const PlaylistResults = ({playlistResults, onPlaylistIDUpdate}) => {
       {
         playlistResults.map((playlist, index) => {
           return (
-            <div className='playlist-item' key={playlist.data.name}>
+            <div className='playlist-item' key={playlist.name}>
               <div className='albumIMGContainer' onClick={() => handleChildPlayListIDUpdate(index)}>
-                <img src={playlist.data.images[0].url} className="albumIMG" alt="ProfilePicture" />
+                <img src={playlist.images[0].url} className="albumIMG" alt="ProfilePicture" />
               </div>
               <div className='playlistName'>
-                  {playlist.data.name}
+                  {playlist.name}
               </div>
               <div className='songTitleAndAuthor'>
-              {playlist.data.tracks.total} Total Songs
+              {playlist.tracks.total} Total Songs
               </div>
             </div>
           )

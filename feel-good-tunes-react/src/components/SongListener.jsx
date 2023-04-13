@@ -12,38 +12,9 @@ import axios from "axios";
 
 import { PlaylistResults } from "../components/PlaylistResults";
 
-
-function playlistDurationCalculator(currentPlaylist){
-    let totalMinutes = 0;
-    let totalHours = 0;
-    let totalSeconds = 0;
-    playListData.results[currentPlaylist].tracks.forEach(trackElement => {
-        const tmp = trackElement.song.duration.toString().split(":")
-        totalSeconds = totalSeconds + (+tmp[2]);
-        if( totalSeconds >= 60)
-        {
-            totalMinutes++;
-            totalSeconds -= 60;
-        }
-        totalMinutes = totalMinutes + (+tmp[1]);
-        if(totalMinutes >= 60)
-        {
-            totalHours++
-            totalMinutes -= 60;
-        }
-        totalHours += (+tmp[0])
-    })
-    return(`${totalHours}:${totalMinutes}:${totalSeconds}`)
-}
-
 //listOfPlaylistIDs come from mongoDB 
 //Will most likely pull through the songs on the home page for all of the emotions so that it doesn't take a few seconds
 const listOfPlaylistIDs = ["27Zm1P410dPfedsdoO9fqm", "0QfHAFhb6iF0kbUKwDmKOn", "6oadp9n7mPc1zH8O0jUT2s", "37i9dQZF1DX0AMssoUKCz7", "37i9dQZF1DZ06evO1YkSM1", "37i9dQZF1DZ06evO3D3LJJ"]
-
-
-
-
-
 
 export const SongListener = ({sessionToken}) => {
     const [playlist, setPlaylist] = useState("");
@@ -74,7 +45,7 @@ export const SongListener = ({sessionToken}) => {
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S
     const searchPlaylistsID = async () =>{
         const promises = listOfPlaylistIDs.map(id =>
-            axios.get(`https://api.spotify.com/v1/playlists/${id}`, {
+            axios.get("https://api.spotify.com/v1/playlists/" + id, {
               headers: {
                 Authorization: `Bearer ${sessionToken}`,
               },
@@ -82,31 +53,47 @@ export const SongListener = ({sessionToken}) => {
           );
         const results = await Promise.all(promises);
         console.log(results[0].data);
-        setPlaylist(results);
+        
         setPlaylistID(0);
+        const playlistsWithDurations = [];
+        //Get the track information such as duration of the playlists
+        for (let playlist of results) {
+            const tracks = playlist.data.tracks.items;
+        
+            const totalDurationMs = tracks.reduce((total, track) => {
+              return total + track.track.duration_ms;
+            }, 0);
+        
+            const totalSeconds = Math.floor(totalDurationMs / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+        
+            const playlistWithDuration = {
+              ...playlist.data,
+              duration: `${hours}h ${minutes}m ${seconds}s`,
+            };
+        
+            playlistsWithDurations.push(playlistWithDuration);
+          }
+          //Get the track information such as duration of the playlists END
+          console.log(playlistsWithDurations);
+          setPlaylist(playlistsWithDurations);
     }
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S END
-
-    //Currently just pulling from json will need to pull from API every time a new playlist is clicked
-    let songsAndArtists = playListData.results[0].tracks.length;
-
-    //Need to add all of the songs durations... We may have this done in back end and already stored.
-    //May also just be something in the api we can utilize to get the duration
-    let playlistDuration = playlistDurationCalculator(0);
 
     return(
         <div className='song-container'>
             <div className='music-player' >
                 <h1 onClick={() => {searchPlaylistsID()}}>CLICK TO LOAD PLAYLISTS</h1>
-                {playlist !== "" && <img className = 'music-player-album'src = {playlist[playlistID].data.images[0].url} alt = "placeholder-album-cover" />}
+                {playlist !== "" && <img className = 'music-player-album'src = {playlist[playlistID].images[0].url} alt = "placeholder-album-cover" />}
                 {playlist !== "" && <div className='music-player-controls'>
-                    {<h2 className='music-player-detail-header'>{playlist[playlistID].data.name}</h2>}
-                    <p className='music-player-details-text'>{songsAndArtists} Artists</p>
-                    <p className='music-player-details-text'>{playlist[playlistID].data.tracks.total} Songs</p>
-                    <p className='music-player-details-text'> Duration: {playlistDuration}</p>
+                    {<h2 className='music-player-detail-header'>{playlist[playlistID].name}</h2>}
+                    <p className='music-player-details-text'>{playlist[playlistID].tracks.total} Songs</p>
+                    <p className='music-player-details-text'> Duration: {playlist[playlistID].duration}</p>
                     <SpotifyPlayer
                         token={sessionToken}
-                        uris={[`spotify:playlist:${playlist[playlistID].data.id}`]}
+                        uris={[`spotify:playlist:${playlist[playlistID].id}`]}
                         styles={{
                             activeColor: '#fff',
                             bgColor: '#949270',
