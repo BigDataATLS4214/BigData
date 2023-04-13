@@ -49,6 +49,10 @@ export const SongListener = ({sessionToken}) => {
     //   setPlaylist(data.playlists.items)
     // }
     //Search for bunch of PLAYLISTS FROM SPOTIFY END
+    useEffect(() => {
+        searchPlaylistsID();
+      }, []);
+    
 
 
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S
@@ -61,20 +65,17 @@ export const SongListener = ({sessionToken}) => {
             })
           );
         const results = await Promise.all(promises);
-        console.log(results[0].data);
-        
-        setPlaylistID(0);
         const playlistsWithDurations = [];
         //Get the track information such as duration of the playlists
         for (let playlist of results) {
             const tracks = playlist.data.tracks.items;
-        
+            //get the duration of every track in the playlist and store in one variable
             const totalDurationMs = tracks.reduce((total, track) => {
               return total + track.track.duration_ms;
             }, 0);
 
             const duration = calculateDuration(totalDurationMs);
-
+            //set up new json with the added duration to the playlist information
             const playlistWithDuration = {
               ...playlist.data,
               duration: duration,
@@ -82,16 +83,15 @@ export const SongListener = ({sessionToken}) => {
         
             playlistsWithDurations.push(playlistWithDuration);
           }
-          //Get the track information such as duration of the playlists END
-          console.log(playlistsWithDurations);
           setPlaylist(playlistsWithDurations);
+          //Get the track information such as duration of the playlists END
+          setPlaylistID(0); //Start off playing the first playlist
     }
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S END
 
     return(
         <div className='song-container'>
             <div className='music-player' >
-                <h1 onClick={() => {searchPlaylistsID()}}>CLICK TO LOAD PLAYLISTS</h1>
                 {playlist !== "" && <img className = 'music-player-album'src = {playlist[playlistID].images[0].url} alt = "placeholder-album-cover" />}
                 {playlist !== "" && <div className='music-player-controls'>
                     {<h2 className='music-player-detail-header'>{playlist[playlistID].name}</h2>}
