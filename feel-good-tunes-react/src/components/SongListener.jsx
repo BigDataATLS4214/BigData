@@ -49,12 +49,12 @@ export const SongListener = ({sessionToken}) => {
     //   setPlaylist(data.playlists.items)
     // }
     //Search for bunch of PLAYLISTS FROM SPOTIFY END
+
+    //When the playlist page is first loaded we will want to get the correct playlists based on the current emotion and load them in
     useEffect(() => {
         searchPlaylistsID();
       }, []);
     
-
-
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S
     const searchPlaylistsID = async () =>{
         const promises = listOfPlaylistIDs.map(id =>
