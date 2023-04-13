@@ -36,28 +36,56 @@ function playlistDurationCalculator(currentPlaylist){
     return(`${totalHours}:${totalMinutes}:${totalSeconds}`)
 }
 
+//listOfPlaylistIDs come from mongoDB
+const listOfPlaylistIDs = ["27Zm1P410dPfedsdoO9fqm", "0QfHAFhb6iF0kbUKwDmKOn", ]
+
+
+
 
 
 
 export const SongListener = ({sessionToken}) => {
     const [playlist, setPlaylist] = useState("");
+    const [playlistID, setPlaylistID] = useState("");
 
-    
-    //GET A PLAYLIST FROM SPOTIFY
-    const searchPlaylists = async () =>{
-      const {data} = await axios.get("https://api.spotify.com/v1/search", {
-        headers:{
-          Authorization: `Bearer ${sessionToken}`
-        },
-        params:{
-          q: "Happy", //May break if not signed into correct spotify this will change.
-          type: "playlist"
+    const handlePlayingPlaylistChange = (newPlaylistId) => {
+        setPlaylistID(newPlaylistId);
+    };
+
+
+    //Search for bunch of PLAYLISTS FROM SPOTIFY
+    // const searchPlaylists = async () =>{
+    //   const {data} = await axios.get("https://api.spotify.com/v1/search", {
+    //     headers:{
+    //       Authorization: `Bearer ${sessionToken}`
+    //     },
+    //     params:{
+    //       q: "Happy", //May break if not signed into correct spotify this will change.
+    //       type: "playlist"
+    //     }
+    //   })
+    //   console.log(data.playlists)
+    //   setPlaylist(data.playlists.items)
+    // }
+    //Search for bunch of PLAYLISTS FROM SPOTIFY END
+
+
+    //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S
+    const searchPlaylistsID = async () =>{
+        var listOfPlaylistData = [];
+        for (const id of listOfPlaylistIDs) {
+            const {data} = await axios.get("https://api.spotify.com/v1/playlists/" + id, {
+                headers:{
+                Authorization: `Bearer ${sessionToken}`
+                }
+            });
+            listOfPlaylistData.push(data);
         }
-      })
-      console.log(data.playlists)
-      setPlaylist(data.playlists.items)
+        console.log(listOfPlaylistData);
+        setPlaylist(listOfPlaylistData);
+        setPlaylistID(0);
     }
-    //GET A PLAYLIST FROM SPOTIFY END
+    //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S END
 
     //Currently just pulling from json will need to pull from API every time a new playlist is clicked
     let songsAndArtists = playListData.results[0].tracks.length;
@@ -69,16 +97,16 @@ export const SongListener = ({sessionToken}) => {
     return(
         <div className='song-container'>
             <div className='music-player' >
-                <h1 onClick={() => {searchPlaylists()}}>CLICK TO LOAD PLAYLISTS</h1>
-                {playlist !== "" && <img className = 'music-player-album'src = {playlist[0].images[0].url} alt = "placeholder-album-cover" />}
+                <h1 onClick={() => {searchPlaylistsID()}}>CLICK TO LOAD PLAYLISTS</h1>
+                {playlist !== "" && <img className = 'music-player-album'src = {playlist[playlistID].images[0].url} alt = "placeholder-album-cover" />}
                 {playlist !== "" && <div className='music-player-controls'>
-                    {<h2 className='music-player-detail-header'>{playlist[0].name}</h2>}
+                    {<h2 className='music-player-detail-header'>{playlist[playlistID].name}</h2>}
                     <p className='music-player-details-text'>{songsAndArtists} Artists</p>
-                    <p className='music-player-details-text'>{playlist[0].tracks.total} Songs</p>
+                    <p className='music-player-details-text'>{playlist[playlistID].tracks.total} Songs</p>
                     <p className='music-player-details-text'> Duration: {playlistDuration}</p>
                     <SpotifyPlayer
                         token={sessionToken}
-                        uris={[`spotify:playlist:${playlist[0].id}`]}
+                        uris={[`spotify:playlist:${playlist[playlistID].id}`]}
                         styles={{
                             activeColor: '#fff',
                             bgColor: '#949270',
@@ -95,7 +123,7 @@ export const SongListener = ({sessionToken}) => {
 
             {/* PLAYLIST RESULTS COMPONENT */}
             {playlist !== "" && <div className='container'>
-                <PlaylistResults playlistResults={playlist}/>
+                <PlaylistResults onPlaylistIDUpdate={handlePlayingPlaylistChange} playlistResults={playlist}/>
             </div>}
             {/* END PLAYLIST RESULTS COMPONENT END */}
         </div>

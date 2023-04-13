@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 
-export const PlaylistResults = ({playlistResults}) => {
+export const PlaylistResults = ({playlistResults, onPlaylistIDUpdate}) => {
   const PORT_NUM = 8000 //change this to your port number!
   const [emotions, setEmotions] = useState([])
 
@@ -22,54 +22,34 @@ export const PlaylistResults = ({playlistResults}) => {
         console.log(error);
       })
   }, emotions)
+
+
+  const handleChildPlayListIDUpdate = (index) => {
+    console.log(index);
+    onPlaylistIDUpdate(index); // Call the parent callback function
+  };
   
 
   return (
     <div>
-    {/* <div className='playlist-container'>
+      <div className='playlist-container'>
       {
-        playListData && playListData.results.map(playlist => {
+        playlistResults.map((playlist, index) => {
           return (
             <div className='playlist-item' key={playlist.name}>
-              <div className='albumIMGContainer'>
-                <img src={profile} className="albumIMG" alt="ProfilePicture" />
+              <div className='albumIMGContainer' onClick={() => handleChildPlayListIDUpdate(index)}>
+                <img src={playlist.images[0].url} className="albumIMG" alt="ProfilePicture" />
               </div>
-
               <div className='playlistName'>
-                {playlist.name}
+                  {playlist.name}
               </div>
-
-              {playlist.tracks.map(data => {
-                return (
-                  <li key={data.song.title} className='songTitleAndAuthor'>
-                    {data.song.title + " (" + data.artists[0].name + ")"}
-                  </li>
-                )
-              })}
+              <div className='songTitleAndAuthor'>
+              {playlist.tracks.total} Total Songs
+              </div>
             </div>
           )
         })}
-    </div> */}
-
-    <div className='playlist-container'>
-      <h2>TESTING PULLING STRAIGHT FROM SPOTIFY</h2>
-    {
-      playlistResults.map(playlist => {
-        return (
-          <div className='playlist-item' key={playlist.name}>
-            <div className='albumIMGContainer'>
-              <img src={playlist.images[0].url} className="albumIMG" alt="ProfilePicture" />
-            </div>
-            <div className='playlistName'>
-                {playlist.name}
-            </div>
-            <div className='songTitleAndAuthor'>
-            {playlist.tracks.total} Total Songs
-            </div>
-          </div>
-        )
-      })}
-    </div>
+      </div>
     </div>
   );
 };

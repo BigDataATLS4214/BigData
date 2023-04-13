@@ -19,6 +19,7 @@
     "react-webcam": "^7.0.1",
     "request": "^2.88.2",
     "sass": "^1.58.3",
+    "spotify-web-api-js": "^1.5.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
