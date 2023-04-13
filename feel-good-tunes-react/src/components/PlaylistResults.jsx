@@ -25,7 +25,6 @@ export const PlaylistResults = ({playlistResults, onPlaylistIDUpdate}) => {
 
 
   const handleChildPlayListIDUpdate = (index) => {
-    console.log(index);
     onPlaylistIDUpdate(index); // Call the parent callback function
   };
   
@@ -36,15 +35,15 @@ export const PlaylistResults = ({playlistResults, onPlaylistIDUpdate}) => {
       {
         playlistResults.map((playlist, index) => {
           return (
-            <div className='playlist-item' key={playlist.name}>
+            <div className='playlist-item' key={playlist.data.name}>
               <div className='albumIMGContainer' onClick={() => handleChildPlayListIDUpdate(index)}>
-                <img src={playlist.images[0].url} className="albumIMG" alt="ProfilePicture" />
+                <img src={playlist.data.images[0].url} className="albumIMG" alt="ProfilePicture" />
               </div>
               <div className='playlistName'>
-                  {playlist.name}
+                  {playlist.data.name}
               </div>
               <div className='songTitleAndAuthor'>
-              {playlist.tracks.total} Total Songs
+              {playlist.data.tracks.total} Total Songs
               </div>
             </div>
           )
