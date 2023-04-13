@@ -16,6 +16,15 @@ import { PlaylistResults } from "../components/PlaylistResults";
 //Will most likely pull through the songs on the home page for all of the emotions so that it doesn't take a few seconds
 const listOfPlaylistIDs = ["27Zm1P410dPfedsdoO9fqm", "0QfHAFhb6iF0kbUKwDmKOn", "6oadp9n7mPc1zH8O0jUT2s", "37i9dQZF1DX0AMssoUKCz7", "37i9dQZF1DZ06evO1YkSM1", "37i9dQZF1DZ06evO3D3LJJ"]
 
+const calculateDuration = (durationMs) => {
+    const totalSeconds = Math.floor(durationMs / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+  
+    return `${hours}h ${minutes}m ${seconds}s`;
+  };
+
 export const SongListener = ({sessionToken}) => {
     const [playlist, setPlaylist] = useState("");
     const [playlistID, setPlaylistID] = useState("");
@@ -63,15 +72,12 @@ export const SongListener = ({sessionToken}) => {
             const totalDurationMs = tracks.reduce((total, track) => {
               return total + track.track.duration_ms;
             }, 0);
-        
-            const totalSeconds = Math.floor(totalDurationMs / 1000);
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-        
+
+            const duration = calculateDuration(totalDurationMs);
+
             const playlistWithDuration = {
               ...playlist.data,
-              duration: `${hours}h ${minutes}m ${seconds}s`,
+              duration: duration,
             };
         
             playlistsWithDurations.push(playlistWithDuration);
