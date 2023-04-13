@@ -8,7 +8,7 @@ import axios from "axios";
 
 
 export const PlaylistResults = ({playlistResults}) => {
-  const PORT_NUM = 5000 //change this to your port number!
+  const PORT_NUM = 8000 //change this to your port number!
   const [emotions, setEmotions] = useState([])
 
   useEffect(() => {
@@ -16,13 +16,13 @@ export const PlaylistResults = ({playlistResults}) => {
       .then(response => {
         if(response.data.length > 0){
           setEmotions(response.data.map(emotion => emotion))
-          console.log(emotions)
         }
       })
       .catch((error) => {
         console.log(error);
       })
   }, emotions)
+  
 
   return (
     <div>

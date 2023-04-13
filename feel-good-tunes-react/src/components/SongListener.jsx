@@ -42,6 +42,7 @@ function playlistDurationCalculator(currentPlaylist){
 export const SongListener = ({sessionToken}) => {
     const [playlist, setPlaylist] = useState("");
 
+    
     //GET A PLAYLIST FROM SPOTIFY
     const searchPlaylists = async () =>{
       const {data} = await axios.get("https://api.spotify.com/v1/search", {
