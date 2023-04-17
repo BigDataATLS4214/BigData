@@ -126,33 +126,50 @@ def make_playlists_neutral():
     playlistID = four.get("id")
     neutral_p.append(playlistID)
 
-def add_to_happy():
+def add_plylists_to_db(playlist):
+    for id in playlist:
+        pl_info = sp.playlist(id)
+        emotion = (pl_info["name"][0:-1]).lower()
+        emotion_id = list(EMOTIONS.find({"name": emotion}, {"id": 1}))[0]["_id"]
+        PLAYLISTS.insert_one({"name": pl_info["name"], "spotify_id": id, "emotion_id": emotion_id})
 
-    #get all happy songs
-    happy_id = list(EMOTIONS.find({"name": "happy"}, {"id": 1}))[0]["_id"] #gets the happy object id from collection
-    all_happy_songs = list(SONGTITLES.find({"emotions": happy_id})) # gives all songs that are happy
+def add_to_songs_to_playlist(playlists, emotion):
 
-    numSongs = all_happy_songs.len() #total # of items in list
+    #get all songs for the emotion
+    emotion_id = list(EMOTIONS.find({"name": emotion}, {"id": 1}))[0]["_id"] #gets the object id from collection
+    all_songs = list(SONGTITLES.find({"emotions": emotion_id})) # gives all songs that are that emotion
+
+    numSongs = len(all_songs) #total # of items in list
     counter = 0
-    currentPlaylistId = happy_p[0]
+    playlist_items = []
+    currentPlaylistId = playlists[0]
     
-    #for all happy songs
-    for song in all_happy_songs:
-        print("in loop")
-        #if int(numSongs/4) <= counter
+    for song in all_songs:
         if int(numSongs/4) <= counter:
-            currentPlaylist = playlists[playlists.index(currentPlaylist) + 1]
+            #store the song in currentPlaylist
+            if len(playlist_items) > 100:
+                n = len(playlist_items) % 100
+                for i in range(0, len(playlist_items), n):
+                    sp.playlist_add_items(currentPlaylistId, playlist_items[i:i+n], position=None)
+            else:
+                sp.playlist_add_items(currentPlaylistId, playlist_items, position=None)
+            if playlists.index(currentPlaylistId) == 3:
+                currentPlaylistId = playlists[0]
+            else:
+                currentPlaylistId = playlists[playlists.index(currentPlaylistId) + 1]
             counter = 0
-        #store the song in currentPlaylist
-        trackURL = "spotify:track:"+all_happy_songs[song]
-        sp.playlist_add_items(currentPlaylistId, items, position=None) # need track URI for item
+            playlist_items = []
+        #add the song uri into list of songs to be added
+        playlist_items.append("spotify:track:"+song["spotify_id"])
         counter = counter + 1
 
-
 if __name__ == "__main__":
-    add_to_happy()
     #make_playlists_happy()
     #make_playlists_sad()
     #make_playlists_angry()
     #make_playlists_surprised()
     #make_playlists_neutral()
+    #add_plylists_to_db(neutral_p)
+    #add_to_songs_to_playlist(happy_p, "happy")
+    pl_info = sp.playlist(happy_p[1])
+    print(len(pl_info["tracks"]["items"]))
