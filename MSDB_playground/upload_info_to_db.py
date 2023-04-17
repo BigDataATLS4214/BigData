@@ -8,7 +8,7 @@ import json
 #LOGGING INTO SPOTIFY USING SPOTIPY
 #def spotify_login(cid, secret):
     #client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret) 
-    #eturn spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    #return spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 cid = config('CLIENT_ID')
 secret = config('CLIENT_SECRET')
