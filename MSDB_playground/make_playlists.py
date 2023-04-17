@@ -155,10 +155,7 @@ def add_to_songs_to_playlist(playlists, emotion):
             else:
                 #store the songs in currentPlaylist
                 sp.playlist_add_items(currentPlaylistId, playlist_items, position=None)
-            if playlists.index(currentPlaylistId) == 3:
-                currentPlaylistId = playlists[0]
-            else:
-                currentPlaylistId = playlists[playlists.index(currentPlaylistId) + 1]
+            currentPlaylistId = playlists[playlists.index(currentPlaylistId) + 1]
             counter = 0
             playlist_items = []
         #add the song uri into list of songs to be added
@@ -172,6 +169,4 @@ if __name__ == "__main__":
     #make_playlists_surprised()
     #make_playlists_neutral()
     #add_plylists_to_db(neutral_p)
-    #add_to_songs_to_playlist(happy_p, "happy")
-    pl_info = sp.playlist(happy_p[1])
-    print(len(pl_info["tracks"]["items"]))
+    add_to_songs_to_playlist(neutral_p, "neutral")
