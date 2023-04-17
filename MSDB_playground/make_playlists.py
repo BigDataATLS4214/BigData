@@ -146,12 +146,14 @@ def add_to_songs_to_playlist(playlists, emotion):
     
     for song in all_songs:
         if int(numSongs/4) <= counter:
-            #store the song in currentPlaylist
+            # can only add 100 songs per request
             if len(playlist_items) > 100:
                 n = len(playlist_items) % 100
                 for i in range(0, len(playlist_items), n):
+                    #store the songs in currentPlaylist
                     sp.playlist_add_items(currentPlaylistId, playlist_items[i:i+n], position=None)
             else:
+                #store the songs in currentPlaylist
                 sp.playlist_add_items(currentPlaylistId, playlist_items, position=None)
             if playlists.index(currentPlaylistId) == 3:
                 currentPlaylistId = playlists[0]
