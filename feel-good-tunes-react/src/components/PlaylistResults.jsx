@@ -8,10 +8,12 @@ import axios from "axios";
 
 
 export const PlaylistResults = ({playlistResults, onPlaylistIDUpdate}) => {
-  const PORT_NUM = 8000 //change this to your port number!
-  const [emotions, setEmotions] = useState([])
+  const PORT_NUM = 8000; //change this to your port number!
+  const [emotions, setEmotions] = useState([]);
+  const [playlistids, setplaylistids] = useState([]);
 
   useEffect(() => {
+    //get the emotions and playlist ids from mongodb
     axios.get('http://localhost:'+PORT_NUM+'/emotions/')
       .then(response => {
         if(response.data.length > 0){
@@ -21,10 +23,22 @@ export const PlaylistResults = ({playlistResults, onPlaylistIDUpdate}) => {
       .catch((error) => {
         console.log(error);
       })
-  }, emotions)
+      
+      axios.get('http://localhost:'+PORT_NUM+'/playlist_ids/')
+      .then(response => {
+        if(response.data.length > 0){
+          setplaylistids(response.data.map(playlist => playlist));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [])
 
 
   const handleChildPlayListIDUpdate = (index) => {
+    console.log("List of Emotions " + emotions);
+    console.log("List of Playlist " + playlistids);
     onPlaylistIDUpdate(index); // Call the parent callback function
   };
   
