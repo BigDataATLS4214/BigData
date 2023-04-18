@@ -81,7 +81,7 @@ function App() {
       {(sessionToken !== "" && page !== 'spotifyConnect') ? <NavBar setPage={setPage} setCamState={setCamState} /> : null}
       {sessionToken === "" ? <SpotifyConnect setSessionToken={setSessionToken}/> : null}
       {(sessionToken !== "" && page === 'home') ? <Home setCamState={setCamState} setPage={setPage} setEmotion={setEmotion}/> : null}
-      {(sessionToken !== "" && page === 'playlists') ? <Playlists sessionToken={sessionToken} emotion = {emotion} happyPlaylistIds = {happyplaylistids}/> : null}
+      {(sessionToken !== "" && page === 'playlists') ? <Playlists sessionToken={sessionToken} emotion = {emotion} happyPlaylistIds = {happyplaylistids} sadPlaylistIds = {sadplaylistids} angryPlaylistIds = {angryplaylistids} surprisedPlaylistIds = {surprisedplaylistids}/> : null}
       {camState ? <Cam /> : null}
     </div>
   );

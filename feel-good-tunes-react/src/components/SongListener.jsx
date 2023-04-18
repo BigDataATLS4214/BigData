@@ -12,10 +12,6 @@ import axios from "axios";
 
 import { PlaylistResults } from "../components/PlaylistResults";
 
-//listOfPlaylistIDs come from mongoDB 
-//Will most likely pull through the songs on the home page for all of the emotions so that it doesn't take a few seconds
-const listOfPlaylistIDs = ["27Zm1P410dPfedsdoO9fqm", "0QfHAFhb6iF0kbUKwDmKOn", "6oadp9n7mPc1zH8O0jUT2s", "37i9dQZF1DX0AMssoUKCz7", "37i9dQZF1DZ06evO1YkSM1", "37i9dQZF1DZ06evO3D3LJJ"]
-
 const calculateDuration = (durationMs) => {
     const totalSeconds = Math.floor(durationMs / 1000);
     const hours = Math.floor(totalSeconds / 3600);
@@ -25,10 +21,12 @@ const calculateDuration = (durationMs) => {
     return `${hours}h ${minutes}m ${seconds}s`;
   };
 
-export const SongListener = ({sessionToken, happyPlaylistIds, emotion}) => {
+export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, angryPlaylistIds, surprisedPlaylistIds,  emotion}) => {
     const [playlist, setPlaylist] = useState("");
     const [playlistID, setPlaylistID] = useState("");
-    const [currentPlaylistBasedOnEmotion, setcurrentPlaylistBasedOnEmotion] = useState("");
+
+    //the api call was not being completed before rendering the page causing errors so this is a quick fix to not render api dependent content until it has recieved the song info
+    const [loaded, setloaded] = useState("");
 
     const handlePlayingPlaylistChange = (newPlaylistId) => {
         setPlaylistID(newPlaylistId);
@@ -53,54 +51,57 @@ export const SongListener = ({sessionToken, happyPlaylistIds, emotion}) => {
 
     //When the playlist page is first loaded we will want to get the correct playlists based on the current emotion and load them in
     useEffect(() => {
-      console.log(happyPlaylistIds);
-      if (emotion === "happy") {
-        setcurrentPlaylistBasedOnEmotion(happyPlaylistIds);
-      }
-      console.log("SEARCH " + currentPlaylistBasedOnEmotion);
-    }, [currentPlaylistBasedOnEmotion, emotion]);
+      var emotionSyncedPlaylistId;
+      if (emotion === "happy") { emotionSyncedPlaylistId = happyPlaylistIds}
+      if (emotion === "sad") { emotionSyncedPlaylistId = sadPlaylistIds }
+      if (emotion === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
+      if (emotion === "surprise") { emotionSyncedPlaylistId = surprisedPlaylistIds}
+      console.log("SEARCH " + emotion + " " + emotionSyncedPlaylistId);
+      searchPlaylistsID(emotionSyncedPlaylistId).then(setloaded(true))
+    }, []);
+    
     
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S
-    const searchPlaylistsID = useCallback(async () => {
-      console.log("SEARCH " + currentPlaylistBasedOnEmotion);
-      const promises = currentPlaylistBasedOnEmotion.map((id) =>
-        axios.get("https://api.spotify.com/v1/playlists/" + id, {
-          headers: {
-            Authorization: `Bearer ${sessionToken}`,
-          },
-        })
-      );
+    const searchPlaylistsID = async (currentPlaylistEmotion) =>{
+      console.log("SEARCH " + currentPlaylistEmotion)
+      const promises = currentPlaylistEmotion.map(id =>
+          axios.get("https://api.spotify.com/v1/playlists/" + id, {
+            headers: {
+              Authorization: `Bearer ${sessionToken}`,
+            },
+          })
+        );
       const results = await Promise.all(promises);
       const playlistsWithDurations = [];
+      //Get the track information such as duration of the playlists
       for (let playlist of results) {
-        const tracks = playlist.data.tracks.items;
-        //get the duration of every track in the playlist and store in one variable
-        const totalDurationMs = tracks.reduce((total, track) => {
-          return total + track.track.duration_ms;
-        }, 0);
-    
-        const duration = calculateDuration(totalDurationMs);
-    
-        const playlistWithDuration = {
-          ...playlist.data,
-          duration: duration,
-        };
-    
-        playlistsWithDurations.push(playlistWithDuration);
-      }
-      setPlaylist(playlistsWithDurations);
-      //Get the track information such as duration of the playlists END
-      setPlaylistID(0);//Start off playing the first playlist
-    }, [currentPlaylistBasedOnEmotion, sessionToken]);
-    
-    useEffect(() => {
-      searchPlaylistsID(emotion);
-    }, [currentPlaylistBasedOnEmotion, emotion, searchPlaylistsID]);
+          const tracks = playlist.data.tracks.items;
+          //get the duration of every track in the playlist and store in one variable
+          const totalDurationMs = tracks.reduce((total, track) => {
+            return total + track.track.duration_ms;
+          }, 0);
+
+          const duration = calculateDuration(totalDurationMs);
+          //set up new json with the added duration to the playlist information
+          const playlistWithDuration = {
+            ...playlist.data,
+            duration: duration,
+          };
+          console.log("PLAYLIST WITH DURATION " + playlistWithDuration)
+          playlistsWithDurations.push(playlistWithDuration);
+        }
+        
+        setPlaylist(playlistsWithDurations);
+        //Get the track information such as duration of the playlists END
+        setPlaylistID(0); //Start off playing the first playlist
+    }
+
+
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S END
 
     return(
         <div className='song-container'>
-            <div className='music-player' >
+            {loaded && <div className='music-player' >
                 {playlist !== "" && <img className = 'music-player-album'src = {playlist[playlistID].images[0].url} alt = "placeholder-album-cover" />}
                 {playlist !== "" && <div className='music-player-controls'>
                     {<h2 className='music-player-detail-header'>{playlist[playlistID].name}</h2>}
@@ -122,9 +123,10 @@ export const SongListener = ({sessionToken, happyPlaylistIds, emotion}) => {
                     <br></br><br></br>
                 </div>}
             </div>
+            }
 
             {/* PLAYLIST RESULTS COMPONENT */}
-            {playlist !== "" && <div className='container'>
+            {loaded && playlist !== "" && <div className='container'>
                 <PlaylistResults onPlaylistIDUpdate={handlePlayingPlaylistChange} playlistResults={playlist}/>
             </div>}
             {/* END PLAYLIST RESULTS COMPONENT END */}
