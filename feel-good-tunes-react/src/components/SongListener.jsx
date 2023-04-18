@@ -53,9 +53,10 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, an
     useEffect(() => {
       var emotionSyncedPlaylistId;
       if (emotion === "happy") { emotionSyncedPlaylistId = happyPlaylistIds}
-      if (emotion === "sad") { emotionSyncedPlaylistId = sadPlaylistIds }
-      if (emotion === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
-      if (emotion === "surprise") { emotionSyncedPlaylistId = surprisedPlaylistIds}
+      else if (emotion === "sad") { emotionSyncedPlaylistId = sadPlaylistIds }
+      else if (emotion === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
+      else if (emotion === "surprise") { emotionSyncedPlaylistId = surprisedPlaylistIds}
+      else{emotionSyncedPlaylistId = happyPlaylistIds}//if ended up on this page from nav bar just default emotion to happy
       console.log("SEARCH " + emotion + " " + emotionSyncedPlaylistId);
       searchPlaylistsID(emotionSyncedPlaylistId).then(setloaded(true))
     }, []);

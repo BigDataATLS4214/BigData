@@ -18,7 +18,6 @@ function App() {
 
   const PORT_NUM = 8000; //change this to your port number!
   const mongoDBURI = 'http://localhost:' + PORT_NUM;
-  const [playlistids, setplaylistids] = useState([]);
 
   const [happyplaylistids, sethappyplaylistids] = useState([]);
   const [sadplaylistids, setsadplaylistids] = useState([]);

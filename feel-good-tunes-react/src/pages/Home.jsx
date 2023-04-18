@@ -16,12 +16,9 @@ import '../scss/Home.scss';
 
 export const Home = ({ setCamState, setPage, setEmotion}) => {
 
-  //GET A PLAYLIST FROM SPOTIFY
   const goToPlaylists = event =>{
     setEmotion(event.currentTarget.id)
     setPage('playlists')
-    console.log(typeof event.currentTarget.id)
-    console.log(event.currentTarget.id);
   }
 
 

@@ -13,7 +13,6 @@ export const Playlists = ({sessionToken, emotion, happyPlaylistIds, sadPlaylistI
         <SongListener sessionToken={sessionToken} happyPlaylistIds={happyPlaylistIds} sadPlaylistIds={sadPlaylistIds} angryPlaylistIds={angryPlaylistIds} surprisedPlaylistIds={surprisedPlaylistIds} emotion={emotion}/>
         {emotion !== "" &&(
           <h1>Emotion is: {emotion} </h1>
-
         )}
       </div>
     )
