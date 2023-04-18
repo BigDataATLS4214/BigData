@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import '../scss/SongListener.scss';
 
@@ -25,9 +25,10 @@ const calculateDuration = (durationMs) => {
     return `${hours}h ${minutes}m ${seconds}s`;
   };
 
-export const SongListener = ({sessionToken}) => {
+export const SongListener = ({sessionToken, happyPlaylistIds, emotion}) => {
     const [playlist, setPlaylist] = useState("");
     const [playlistID, setPlaylistID] = useState("");
+    const [currentPlaylistBasedOnEmotion, setcurrentPlaylistBasedOnEmotion] = useState("");
 
     const handlePlayingPlaylistChange = (newPlaylistId) => {
         setPlaylistID(newPlaylistId);
@@ -52,41 +53,49 @@ export const SongListener = ({sessionToken}) => {
 
     //When the playlist page is first loaded we will want to get the correct playlists based on the current emotion and load them in
     useEffect(() => {
-        searchPlaylistsID();
-      }, []);
+      console.log(happyPlaylistIds);
+      if (emotion === "happy") {
+        setcurrentPlaylistBasedOnEmotion(happyPlaylistIds);
+      }
+      console.log("SEARCH " + currentPlaylistBasedOnEmotion);
+    }, [currentPlaylistBasedOnEmotion, emotion]);
     
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S
-    const searchPlaylistsID = async () =>{
-        const promises = listOfPlaylistIDs.map(id =>
-            axios.get("https://api.spotify.com/v1/playlists/" + id, {
-              headers: {
-                Authorization: `Bearer ${sessionToken}`,
-              },
-            })
-          );
-        const results = await Promise.all(promises);
-        const playlistsWithDurations = [];
-        //Get the track information such as duration of the playlists
-        for (let playlist of results) {
-            const tracks = playlist.data.tracks.items;
-            //get the duration of every track in the playlist and store in one variable
-            const totalDurationMs = tracks.reduce((total, track) => {
-              return total + track.track.duration_ms;
-            }, 0);
-
-            const duration = calculateDuration(totalDurationMs);
-            //set up new json with the added duration to the playlist information
-            const playlistWithDuration = {
-              ...playlist.data,
-              duration: duration,
-            };
-        
-            playlistsWithDurations.push(playlistWithDuration);
-          }
-          setPlaylist(playlistsWithDurations);
-          //Get the track information such as duration of the playlists END
-          setPlaylistID(0); //Start off playing the first playlist
-    }
+    const searchPlaylistsID = useCallback(async () => {
+      console.log("SEARCH " + currentPlaylistBasedOnEmotion);
+      const promises = currentPlaylistBasedOnEmotion.map((id) =>
+        axios.get("https://api.spotify.com/v1/playlists/" + id, {
+          headers: {
+            Authorization: `Bearer ${sessionToken}`,
+          },
+        })
+      );
+      const results = await Promise.all(promises);
+      const playlistsWithDurations = [];
+      for (let playlist of results) {
+        const tracks = playlist.data.tracks.items;
+        //get the duration of every track in the playlist and store in one variable
+        const totalDurationMs = tracks.reduce((total, track) => {
+          return total + track.track.duration_ms;
+        }, 0);
+    
+        const duration = calculateDuration(totalDurationMs);
+    
+        const playlistWithDuration = {
+          ...playlist.data,
+          duration: duration,
+        };
+    
+        playlistsWithDurations.push(playlistWithDuration);
+      }
+      setPlaylist(playlistsWithDurations);
+      //Get the track information such as duration of the playlists END
+      setPlaylistID(0);//Start off playing the first playlist
+    }, [currentPlaylistBasedOnEmotion, sessionToken]);
+    
+    useEffect(() => {
+      searchPlaylistsID(emotion);
+    }, [currentPlaylistBasedOnEmotion, emotion, searchPlaylistsID]);
     //GET PLAYLISTS BASED ON A LIST OF PLAYLIST ID'S END
 
     return(

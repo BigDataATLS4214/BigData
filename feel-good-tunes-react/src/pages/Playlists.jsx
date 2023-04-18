@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { SongListener } from '../components/SongListener';
 
 export const Playlists = ({sessionToken, emotion, happyPlaylistIds}) => {
-  useEffect(() => {console.log("PLAYLIST " + happyPlaylistIds)})
     return(
       <div>
         <SongListener sessionToken={sessionToken} happyPlaylistIds={happyPlaylistIds} emotion={emotion}/>
