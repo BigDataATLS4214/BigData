@@ -7,12 +7,23 @@ import mediapipe as mp
 from keras.models import load_model
 import webbrowser
 
+# Stuff for MongoDB Comunication
+import pymongo
+from decouple import config
+from datetime import datetime
+import certifi
+
+CLIENT = pymongo.MongoClient(config('ATLAS_URI'), tlsCAFile=certifi.where())
+DB = CLIENT["music_list"]
+OUTPUTS = DB["outputs"]
+
 model  = load_model("model.h5")
 label = np.load("labels.npy")
 holistic = mp.solutions.holistic
 hands = mp.solutions.hands
 holis = holistic.Holistic()
 drawing = mp.solutions.drawing_utils
+
 
 st.header("Emotion Based Music Recommender")
 
@@ -64,7 +75,7 @@ class EmotionProcessor:
 			lst = np.array(lst).reshape(1,-1)
 
 			pred = label[np.argmax(model.predict(lst))]
-
+   			
 			print(pred)
 			cv2.putText(frm, pred, (50,50),cv2.FONT_ITALIC, 1, (255,0,0),2)
 
@@ -82,20 +93,21 @@ class EmotionProcessor:
 
 		return av.VideoFrame.from_ndarray(frm, format="bgr24")
 
-lang = st.text_input("Language")
-singer = st.text_input("singer")
-
-if lang and singer and st.session_state["run"] != "false":
-	webrtc_streamer(key="key", desired_playing_state=True,
+if st.session_state["run"] != "false":
+	webrtc_streamer(key="example",
 				video_processor_factory=EmotionProcessor)
-
+	
+st.text("Current emotion is: " + emotion)
 btn = st.button("Recommend me songs")
+
+now = datetime.now()
 
 if btn:
 	if not(emotion):
 		st.warning("Please let me capture your emotion first")
 		st.session_state["run"] = "true"
 	else:
-		webbrowser.open(f"https://www.youtube.com/results?search_query={lang}+{emotion}+song+{singer}")
+		OUTPUTS.insert_one({"name": emotion, "createdAt": now})
+		# webbrowser.open(f"https://www.youtube.com/results?search_query={lang}+{emotion}+song+{singer}")
 		np.save("emotion.npy", np.array([""]))
 		st.session_state["run"] = "false"

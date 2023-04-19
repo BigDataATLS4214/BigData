@@ -14,10 +14,10 @@ export const Cam = () => {
         <div className="container">
             <div className="center">
                 <h1>TESTING EMBEDDING  WEBSITE</h1>
-                <iframe title="streamlitApp" src="http://localhost:8501/" width="100%" height="500px" frameBorder="0">
+                <iframe title="streamlitApp" src="http://localhost:8501/" width="100%" height="500px" allow="camera; microphone" frameBorder="0">
                     <p>Your browser does not support iframes.</p>
                 </iframe>
-            <h1 className="header-font">The camera will now scan your mood.</h1>
+            {/* <h1 className="header-font">The camera will now scan your mood.</h1>
                 <Webcam 
                 mirrored = {true}
                 ref = {webcamRef}
@@ -29,7 +29,7 @@ export const Cam = () => {
                         <img src = {imgSrc} />
                         <h1 className = "header-font">Looking good!</h1>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     )
