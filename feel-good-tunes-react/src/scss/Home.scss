@@ -12,6 +12,12 @@
 .home{
     font-family: Caraque Regular Melted, cursive; 
 }
+.before-you-start-text{
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 3vw;
+    text-align: center;
+    margin: 1.5vw;
+}
 .half-page-left{
     display: flex;
     width: 46%;
@@ -31,7 +37,7 @@
 }
 .songs-that-match{
     font-family: Cooper Black, cursive;
-    font-size: 4vw;
+    font-size: 3.8vw;
     text-align: left;
     padding-top: 2vw;
 }
@@ -70,7 +76,6 @@
     justify-content: center;
     width: 250px;
     height: 80px;
-    margin-left: 5vw;
     background: rgba(163, 101, 109, 0.5);
     box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
     font-family: Caraque Regular Melted, cursive;
@@ -78,6 +83,24 @@
     &:hover{
         background: rgba(133, 78, 87, 0.5);
     }
+}
+.sign-into-spotify{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 200px;
+    height: 70px;
+    margin:auto;
+    background: #949270;
+    box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 22px;
+    &:hover{
+        background: #6f6e54;
+    }
+
+
 }
 .emotions{
     display: inline;

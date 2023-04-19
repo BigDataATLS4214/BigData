@@ -64,13 +64,15 @@ export const SpotifyConnect = ( {setSessionToken} ) => {
   //   ))
   // }
 
+  let url = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state`;
+
     return(
-      <div className='container'>
+      <div className='home-container'>
         {/* Spotify AUTHENTICATION */}
         {!token ? 
-        <div>
-          <h2>Before you continue, please sign into spotify</h2>
-          <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state`}> Login to Spotify </a>
+        <div >
+          <h2 className = 'before-you-start-text'>Before you continue, please sign into spotify</h2>
+          <button className = 'sign-into-spotify' onClick = {() => {window.location.href = url}}>Log in to Spotify</button>
         </div>
           : 
           <button onClick={logout}>Logout</button>}
