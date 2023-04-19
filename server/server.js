@@ -23,10 +23,12 @@ connection.once('open', ()=>{
 const emotionRouter = require('./routes/emotions');
 const songTitleRouter = require('./routes/song_titles');
 const playlistIdRouter = require('./routes/playlist_ids');
+const outputRouter = require('./routes/output')
 
 app.use('/emotions', emotionRouter);
 app.use('/song_titles', songTitleRouter);
 app.use('/playlist_ids', playlistIdRouter);
+app.use('/output', outputRouter);
 
  
 app.listen(port, () => {
