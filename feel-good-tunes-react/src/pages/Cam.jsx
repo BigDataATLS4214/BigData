@@ -13,6 +13,10 @@ export const Cam = () => {
     return(
         <div className="container">
             <div className="center">
+                <h1>TESTING EMBEDDING  WEBSITE</h1>
+                <iframe title="streamlitApp" src="http://localhost:8501/" width="100%" height="500px" frameBorder="0">
+                    <p>Your browser does not support iframes.</p>
+                </iframe>
             <h1 className="header-font">The camera will now scan your mood.</h1>
                 <Webcam 
                 mirrored = {true}
