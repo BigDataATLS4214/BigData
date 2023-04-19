@@ -64,3 +64,10 @@ If everything was installed correctly, you should get the following message in y
   ```To create a production build, use npm run build.```
 
   ```webpack compiled successfully```
+  
+  ## Frontend Streamlit
+  
+  1. ```cd``` into the **ML** folder
+  2. pip install streamlit opencv-python-headless
+  3. streamlit run webCamApp.py
+  
