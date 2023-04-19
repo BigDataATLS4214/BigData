@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import profile from '../img/profile-picture.png';
 import { PlaylistResults } from "../components/PlaylistResults";
 import { withRouter } from "react-router";
+import  spotifyLogo from '../img/spotify-logo.gif';
 
 import axios from "axios";
 
@@ -72,6 +73,7 @@ export const SpotifyConnect = ( {setSessionToken} ) => {
         {!token ? 
         <div >
           <h2 className = 'before-you-start-text'>Before you continue, please sign into spotify</h2>
+          <img style = {{width: '70%'}}src ={spotifyLogo} />
           <button className = 'sign-into-spotify' onClick = {() => {window.location.href = url}}>Log in to Spotify</button>
         </div>
           : 
