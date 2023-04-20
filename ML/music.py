@@ -24,7 +24,16 @@ hands = mp.solutions.hands
 holis = holistic.Holistic()
 drawing = mp.solutions.drawing_utils
 
-
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #ADD8E6 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 st.header("Emotion Based Music Recommender")
 
 if "run" not in st.session_state:
@@ -82,9 +91,9 @@ class EmotionProcessor:
 			np.save("emotion.npy", np.array([pred]))
 
 			
-		drawing.draw_landmarks(frm, res.face_landmarks, holistic.FACEMESH_TESSELATION,
-								landmark_drawing_spec=drawing.DrawingSpec(color=(0,0,255), thickness=-1, circle_radius=1),
-								connection_drawing_spec=drawing.DrawingSpec(thickness=1))
+		# drawing.draw_landmarks(frm, res.face_landmarks, holistic.FACEMESH_TESSELATION,
+		# 						landmark_drawing_spec=drawing.DrawingSpec(color=(0,0,255), thickness=-1, circle_radius=1),
+		# 						connection_drawing_spec=drawing.DrawingSpec(thickness=1))
 		drawing.draw_landmarks(frm, res.left_hand_landmarks, hands.HAND_CONNECTIONS)
 		drawing.draw_landmarks(frm, res.right_hand_landmarks, hands.HAND_CONNECTIONS)
 
@@ -94,20 +103,19 @@ class EmotionProcessor:
 		return av.VideoFrame.from_ndarray(frm, format="bgr24")
 
 if st.session_state["run"] != "false":
-	webrtc_streamer(key="example",
+	webrtc_streamer(key="example", desired_playing_state=True,
 				video_processor_factory=EmotionProcessor)
 	
-st.text("Current emotion is: " + emotion)
-btn = st.button("Recommend me songs")
+btn = st.button("Confirm Emotion")
 
 now = datetime.now()
 
 if btn:
 	if not(emotion):
-		st.warning("Please let me capture your emotion first")
+		st.warning("Please capture your emotion first")
 		st.session_state["run"] = "true"
 	else:
+		print("EMOTION OUTPUT " + emotion)
 		OUTPUTS.insert_one({"name": emotion, "createdAt": now})
-		# webbrowser.open(f"https://www.youtube.com/results?search_query={lang}+{emotion}+song+{singer}")
 		np.save("emotion.npy", np.array([""]))
-		st.session_state["run"] = "false"
+		st.session_state["run"] = "true"
