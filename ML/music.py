@@ -79,10 +79,6 @@ try:
 except:
 	emotion=""
 
-if not(emotion):
-	st.session_state["run"] = "true"
-else:
-	st.session_state["run"] = "false"
 
 class EmotionProcessor:
 	def recv(self, frame):
@@ -135,38 +131,15 @@ class EmotionProcessor:
 
 		##############################
 		return av.VideoFrame.from_ndarray(frm, format="bgr24")
-
+ 
     
-    
-# set the countdown timer duration in seconds
-countdown_duration = 3
+   
 
-# display the countdown timer
-with st.empty():
-    for i in range(countdown_duration, 0, -1):
-        # update the timer text on each iteration
-        timer_text = f"Starting in {i} seconds..."
-        st.write(timer_text)
-        # wait for 1 second before the next iteration
-        time.sleep(1)
-
-    # update the timer text to indicate that the countdown has finished
-    timer_text = "Scanning Now!"
-    st.write(timer_text)
-    
-if not st.empty():
-    webrtc_streamer(key="example", desired_playing_state=True,
-	video_processor_factory=EmotionProcessor)
-
-# enter the next if case after the countdown has finished
-# if st.button("Enter next case"):
-    # if st.session_state["run"] != "false":
-	
-    
+webrtc_streamer(key="example", desired_playing_state=True, async_processing=True,
+					video_processor_factory=EmotionProcessor)
 
 
-
-btn = st.button("Confirm Emotion")
+btn = st.button("Capture Emotion")
 
 now = datetime.now()
 
@@ -176,7 +149,8 @@ if btn:
 		st.session_state["run"] = "true"
 	else:
 		print("EMOTION OUTPUT " + emotion)
+		st.header(emotion + " emotion captured!")
 		#Update mongodb with the newly scanned motion
 		# OUTPUTS.insert_one({"name": emotion, "createdAt": now})
 		np.save("emotion.npy", np.array([""]))
-		st.session_state["run"] = "true"
+		st.session_state["run"] = "false"
