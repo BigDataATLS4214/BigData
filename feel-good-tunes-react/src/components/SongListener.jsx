@@ -12,6 +12,9 @@ import axios from "axios";
 
 import { PlaylistResults } from "../components/PlaylistResults";
 
+const PORT_NUM = 8000; //change this to your port number!
+const mongoDBURI = 'http://localhost:' + PORT_NUM;
+
 const calculateDuration = (durationMs) => {
     const totalSeconds = Math.floor(durationMs / 1000);
     const hours = Math.floor(totalSeconds / 3600);
@@ -51,13 +54,20 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, an
 
     //When the playlist page is first loaded we will want to get the correct playlists based on the current emotion and load them in
     useEffect(() => {
+      axios.get(mongoDBURI + '/Output/')
+      .then(response => {
+        console.log("Current EMOTION: "  + response.data.name)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
       var emotionSyncedPlaylistId;
       if (emotion === "happy") { emotionSyncedPlaylistId = happyPlaylistIds}
       else if (emotion === "sad") { emotionSyncedPlaylistId = sadPlaylistIds }
       else if (emotion === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
       else if (emotion === "surprise") { emotionSyncedPlaylistId = surprisedPlaylistIds}
       else{emotionSyncedPlaylistId = happyPlaylistIds}//if ended up on this page from nav bar just default emotion to happy
-      console.log("SEARCH " + emotion + " " + emotionSyncedPlaylistId);
       searchPlaylistsID(emotionSyncedPlaylistId).then(setloaded(true))
     }, []);
     
