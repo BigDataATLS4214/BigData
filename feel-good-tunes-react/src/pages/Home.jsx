@@ -14,17 +14,17 @@ import axios from "axios";
 
 import '../scss/Home.scss';
 
-export const Home = ({ setCamState, setPage, setEmotion}) => {
+export const Home = ({setPage, setPreviousPage, setEmotion}) => {
 
   const goToPlaylists = event =>{
     setEmotion(event.currentTarget.id)
+    setPreviousPage('emotionPicked')
     setPage('playlists')
   }
 
 
   const renderOnlyCam = () => {
-    setCamState(true);
-    setPage('');
+    setPage('scanMood');
   }
     return(
       <div className='home-container'>

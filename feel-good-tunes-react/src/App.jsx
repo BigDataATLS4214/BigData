@@ -11,8 +11,8 @@ import { Cam } from './pages/Cam';
 function App() {
   const [page, setPage] = useState('home');
   const [emotion, setEmotion] = useState("");
-  const [camState, setCamState] = useState(false);
   const [sessionToken, setSessionToken] = useState("");
+  const [previouspage, setPreviousPage] = useState("ML");
 
 
 
@@ -77,11 +77,11 @@ function App() {
 
   return (
     <div>
-      {(sessionToken !== "" && page !== 'spotifyConnect') ? <NavBar setPage={setPage} setCamState={setCamState} /> : null}
+      {(sessionToken !== "" && page !== 'spotifyConnect') ? <NavBar setPage={setPage} /> : null}
       {sessionToken === "" ? <SpotifyConnect setSessionToken={setSessionToken}/> : null}
-      {(sessionToken !== "" && page === 'home') ? <Home setCamState={setCamState} setPage={setPage} setEmotion={setEmotion}/> : null}
-      {(sessionToken !== "" && page === 'playlists') ? <Playlists sessionToken={sessionToken} emotion = {emotion} happyPlaylistIds = {happyplaylistids} sadPlaylistIds = {sadplaylistids} angryPlaylistIds = {angryplaylistids} surprisedPlaylistIds = {surprisedplaylistids}/> : null}
-      {camState ? <Cam /> : null}
+      {(sessionToken !== "" && page === 'home') ? <Home setPage={setPage} setPreviousPage={setPreviousPage} setEmotion={setEmotion} /> : null}
+      {(sessionToken !== "" && page === 'playlists') ? <Playlists sessionToken={sessionToken} emotion = {emotion} happyPlaylistIds = {happyplaylistids} sadPlaylistIds = {sadplaylistids} angryPlaylistIds = {angryplaylistids} surprisedPlaylistIds = {surprisedplaylistids} previousPage = {previouspage}/> : null}
+      {(sessionToken !== "" && page === 'scanMood' )? <Cam setPage={setPage} setPreviousPage={setPreviousPage}/> : null}
     </div>
   );
 }

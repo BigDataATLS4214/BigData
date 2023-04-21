@@ -32,6 +32,7 @@ export const SpotifyConnect = ( {setSessionToken} ) => {
       setToken(token);
       setSessionToken(token);
     }
+    //add error handler for when the hash is not grabbed.
   }, [])
 
   const logout = () => {
