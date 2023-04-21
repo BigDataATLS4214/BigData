@@ -54,21 +54,22 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, an
 
     //When the playlist page is first loaded we will want to get the correct playlists based on the current emotion and load them in
     useEffect(() => {
+
+      //Only want to use the output from mongo db if the user is navigating from the scan mood or say mood features
       axios.get(mongoDBURI + '/Output/')
       .then(response => {
         console.log("Current EMOTION: "  + response.data.name)
+        var emotionSyncedPlaylistId;
+        if (response.data.name === "happy") { emotionSyncedPlaylistId = happyPlaylistIds}
+        else if (response.data.name === "sad") { emotionSyncedPlaylistId = sadPlaylistIds }
+        else if (response.data.name === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
+        else if (response.data.name === "surprise" || response.data.name === "surprised") { emotionSyncedPlaylistId = surprisedPlaylistIds}
+        else{emotionSyncedPlaylistId = happyPlaylistIds}//if ended up on this page from nav bar just default emotion to happy
+        searchPlaylistsID(emotionSyncedPlaylistId).then(setloaded(true))
       })
       .catch((error) => {
         console.log(error);
       })
-
-      var emotionSyncedPlaylistId;
-      if (emotion === "happy") { emotionSyncedPlaylistId = happyPlaylistIds}
-      else if (emotion === "sad") { emotionSyncedPlaylistId = sadPlaylistIds }
-      else if (emotion === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
-      else if (emotion === "surprise") { emotionSyncedPlaylistId = surprisedPlaylistIds}
-      else{emotionSyncedPlaylistId = happyPlaylistIds}//if ended up on this page from nav bar just default emotion to happy
-      searchPlaylistsID(emotionSyncedPlaylistId).then(setloaded(true))
     }, []);
     
     
