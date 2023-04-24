@@ -80,5 +80,11 @@ If everything was installed correctly, you should get the following message in y
   4. pip install PyAudio
 
   ### Facial Recognition ML
-  1. 
+  1. pip install streamlit_webrtc
+  2. pip install streamlit
+  3. pip install av
+  4. pip install cv2
+  5. pip install numpy
+  6. pip install mediapipe
+  7. Load in the from keras.models import load_model
   

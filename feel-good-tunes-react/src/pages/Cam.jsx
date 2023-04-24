@@ -16,7 +16,6 @@ export const Cam = ({setPage, setPreviousPage}) => {
                 <iframe title="streamlitApp" src="http://localhost:8501/" width="100%" height="1000px" allow="camera; microphone" frameBorder="0">
                     <p>Your browser does not support iframes.</p>
                 </iframe>
-
                 <button onClick = {() => goToPlaylists()} className='scan-mood-button'>View Playlists!</button>
             {/* <h1 className="header-font">The camera will now scan your mood.</h1>
                 <Webcam 
