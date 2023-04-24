@@ -70,4 +70,15 @@ If everything was installed correctly, you should get the following message in y
   1. ```cd``` into the **ML** folder
   2. pip install streamlit opencv-python-headless
   3. streamlit run webCamApp.py
+
+  ## ML dependencies
+  
+  ### Audio Recognition ML
+  1. brew install portaudio
+  2. pip install streamlit
+  3. pip install SpeechRecognition
+  4. pip install PyAudio
+
+  ### Facial Recognition ML
+  1. 
   
