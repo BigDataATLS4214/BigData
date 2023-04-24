@@ -3,55 +3,11 @@ import speech_recognition as sr
 from PIL import Image
 import os
 
-#CSS styles
-CSS = """
-
-html{
-	background: #EDD8C5;
-}
-
-h2 {
-    color: black;
-    text-align: center;
-    font-size: 3.8vw;
-}
-p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-.css-fg4pbf {
-	background: #EDD8C5;
-}
-
-.css-18ni7ap {
-	background: #EDD8C5;
-}
-
-.css-1dp5vir {
-	height: 0px;
-}
-
-.css-fg4pbf {
-	align-items: center;
-    justify-content: center;
-}
-"""
-
-# Hide the navigation menu and "Made with Streamlit" footer
-hide_menu_css_style = """
-        <style>
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        </style>
-        """
-st.markdown(hide_menu_css_style, unsafe_allow_html=True)
-st.markdown(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        audio = r.listen(source)
+        audio = r.listen(source, timeout=5, phrase_time_limit=5)
         if audio:
             try:
                 txt = r.recognize_google(audio)
@@ -79,10 +35,9 @@ def checkText(mytxt):
 
 def main():
     img = Image.open('microphone-solid.png')
-    st.image(img, width=65)
+    st.image(img, width=75)
 
     if st.button('Click to record audio'):
-        st.write("Say your mood...")
         txt = get_audio()
         print(txt)
         if txt:
@@ -95,8 +50,5 @@ def main():
                 st.write('Choose an available genre!')
 
             return return_flag
-        else:
-            st.write("Say your mood...")
-            
 
 main()
