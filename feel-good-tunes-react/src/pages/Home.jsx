@@ -4,6 +4,7 @@ import happy from '../img/happy-icon.png';
 import sad from '../img/sad-icon.png';
 import angry from '../img/angry-icon.png';
 import surprise from '../img/suprise-icon.png';
+import neutral from '../img/neutral.png';
 import microphone from '../img/microphone-icon.png'
 import face from "../img/face-id-icon.png";
 import { PlaylistResults } from "../components/PlaylistResults";
@@ -54,6 +55,12 @@ export const Home = ({setPage, setPreviousPage, setEmotion}) => {
                 <img src = {sad} className='icon-size' alt="Sad Icon"/>
               </button>
               <p className='emotion-caption'>Sad</p>
+            </div>
+            <div className = 'emotion-plus-caption'>
+              <button id = 'neutral' className='emotion-button' onClick = {goToPlaylists}>
+                <img src = {neutral} className='icon-size' alt = "Netural Icon"/>
+              </button>
+              <p className='emotion-caption'>Neutral</p>
             </div>
             <div className='emotion-plus-caption'>
               <button id = 'angry' className = 'emotion-button' onClick = {goToPlaylists}>

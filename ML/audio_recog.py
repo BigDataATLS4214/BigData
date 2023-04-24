@@ -7,7 +7,7 @@ import os
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        audio = r.listen(source)
+        audio = r.listen(source, timeout=5, phrase_time_limit=5)
         if audio:
             try:
                 txt = r.recognize_google(audio)
