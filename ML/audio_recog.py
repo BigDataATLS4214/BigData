@@ -5,9 +5,11 @@ import os
 
 #CSS styles
 CSS = """
+
 html{
 	background: #EDD8C5;
 }
+
 h2 {
     color: black;
     text-align: center;
@@ -21,12 +23,15 @@ p {
 .css-fg4pbf {
 	background: #EDD8C5;
 }
+
 .css-18ni7ap {
 	background: #EDD8C5;
 }
+
 .css-1dp5vir {
 	height: 0px;
 }
+
 .css-fg4pbf {
 	align-items: center;
     justify-content: center;
@@ -46,7 +51,7 @@ st.markdown(f'<style>{CSS}</style>', unsafe_allow_html=True)
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        audio = r.listen(source)
+        audio = r.listen(source, timeout=5, phrase_time_limit=5)
         if audio:
             try:
                 txt = r.recognize_google(audio)
