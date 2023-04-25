@@ -16,13 +16,19 @@ const PORT_NUM = 8000; //change this to your port number!
 const mongoDBURI = 'http://localhost:' + PORT_NUM;
 
 const calculateDuration = (durationMs) => {
+  console.log("DURATION MS: " + durationMs);
     const totalSeconds = Math.floor(durationMs / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
-  
-    return `${hours}h ${minutes}m ${seconds}s`;
-  };
+
+    if (days > 0) {
+      return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    } else {
+      return `${hours}h ${minutes}m ${seconds}s`;
+    }
+};
 
 export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, neutralPlaylistIds, angryPlaylistIds, surprisedPlaylistIds,  emotion, previousPage}) => {
     const [playlist, setPlaylist] = useState("");
@@ -35,27 +41,9 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
         setPlaylistID(newPlaylistId);
     };
 
-
-    //Search for bunch of PLAYLISTS FROM SPOTIFY
-    // const searchPlaylists = async () =>{
-    //   const {data} = await axios.get("https://api.spotify.com/v1/search", {
-    //     headers:{
-    //       Authorization: `Bearer ${sessionToken}`
-    //     },
-    //     params:{
-    //       q: "Happy", //May break if not signed into correct spotify this will change.
-    //       type: "playlist"
-    //     }
-    //   })
-    //   console.log(data.playlists)
-    //   setPlaylist(data.playlists.items)
-    // }
-    //Search for bunch of PLAYLISTS FROM SPOTIFY END
-
     //When the playlist page is first loaded we will want to get the correct playlists based on the current emotion and load them in
     useEffect(() => {
       setloaded(false);
-      console.log("DD" + previousPage);
       //Only want to use the output from mongo db if the user is navigating from the scan mood or say mood features
       if(previousPage === "ML")
       {
@@ -102,13 +90,14 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
         );
       const results = await Promise.all(promises);
       const playlistsWithDurations = [];
+      let totalDurationMs = 0;
       //Get the track information such as duration of the playlists
       for (let playlist of results) {
           const tracks = playlist.data.tracks.items;
-          //get the duration of every track in the playlist and store in one variable
-          const totalDurationMs = tracks.reduce((total, track) => {
-            return total + track.track.duration_ms;
-          }, 0);
+          //get the duration of every track in the playlist and add it to the total
+          for (let track of tracks) {
+            totalDurationMs += track.track.duration_ms;
+          }
 
           const duration = calculateDuration(totalDurationMs);
           //set up new json with the added duration to the playlist information
