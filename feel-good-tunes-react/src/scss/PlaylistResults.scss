@@ -9,6 +9,19 @@
     padding-right: 5%;
 }
 
+.PlaylistHeader{
+    font-family: Cooper Black, cursive;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 0px;
+    padding-left: 2%;
+    padding-right: 5%;
+}
+
 .playlist-container{
     display:flex; /*changes the container into a flex box*/
 	flex-wrap:wrap; /*wrap, nowrap, wrap-reverse*/
