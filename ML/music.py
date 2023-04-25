@@ -61,6 +61,18 @@ p {
 }
 """
 
+button_style = """
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 70px;
+    background: rgba(163, 101, 109, 0.5);
+    box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 25px;
+    margin-bottom: 1vw;
+"""
+
 # Hide the navigation menu and "Made with Streamlit" footer
 hide_menu_css_style = """
         <style>
@@ -138,18 +150,18 @@ class EmotionProcessor:
 webrtc_streamer(key="example", desired_playing_state=True, async_processing=True,
 					video_processor_factory=EmotionProcessor)
 
-
+st.write('<style>div.stButton > button:first-child { %s }</style>' % button_style, unsafe_allow_html=True)
 btn = st.button("Capture Emotion")
 
 now = datetime.now()
 
 if btn:
 	if not(emotion):
-		st.warning("Please capture your emotion first")
+		st.warning(f"<div style='text-align:center;'>Please capture your emotion first</div>", unsafe_allow_html=True)
 		st.session_state["run"] = "true"
 	else:
 		print("EMOTION OUTPUT " + emotion)
-		st.header(emotion + " emotion captured!")
+		st.write(f"<div style='text-align:center; font-size: 24px;'><b>{emotion.capitalize()}</b> confirmed </div>", unsafe_allow_html=True)
 		#Update mongodb with the newly scanned motion
 		OUTPUTS.insert_one({"name": emotion, "createdAt": now})
 		np.save("emotion.npy", np.array([""]))

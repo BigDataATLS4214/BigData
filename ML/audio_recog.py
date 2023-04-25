@@ -128,7 +128,7 @@ def main():
 
             if return_flag != -1:
                 OUTPUTS.insert_one({"name": txt, "createdAt": now})
-                st.write(f"<div style='text-align:center;'><b>{genre}</b> confirmed </div>", unsafe_allow_html=True)
+                st.write(f"<div style='text-align:center; font-size: 24px;'><b>{genre.capitalize()}</b> confirmed </div>", unsafe_allow_html=True)
             else:
                 st.write(f"<div style='text-align:center;'>Please try again!</div>", unsafe_allow_html=True)
 
