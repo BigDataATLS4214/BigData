@@ -151,6 +151,6 @@ if btn:
 		print("EMOTION OUTPUT " + emotion)
 		st.header(emotion + " emotion captured!")
 		#Update mongodb with the newly scanned motion
-		# OUTPUTS.insert_one({"name": emotion, "createdAt": now})
+		OUTPUTS.insert_one({"name": emotion, "createdAt": now})
 		np.save("emotion.npy", np.array([""]))
 		st.session_state["run"] = "false"

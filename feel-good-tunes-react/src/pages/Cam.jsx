@@ -12,7 +12,7 @@ export const Cam = ({setPage, setPreviousPage}) => {
     return(
         <div className="container">
             <div className="center">
-                <iframe title="streamlitApp" src="http://localhost:8501/" width="100%" height="500px" allow="camera; microphone" frameBorder="0">
+                <iframe title="streamlitApp" src="http://localhost:8501/" width="100%" height="800px" allow="camera; microphone" frameBorder="0">
                     <p>Your browser does not support iframes.</p>
                 </iframe>
                 <button onClick = {() => goToPlaylists()} className='scan-mood-button'>View Playlists!</button>

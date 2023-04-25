@@ -3,6 +3,16 @@ import speech_recognition as sr
 from PIL import Image
 import os
 
+# Stuff for MongoDB Comunication
+import pymongo
+from decouple import config
+from datetime import datetime
+import certifi
+
+CLIENT = pymongo.MongoClient(config('ATLAS_URI'), tlsCAFile=certifi.where())
+DB = CLIENT["music_list"]
+OUTPUTS = DB["outputs"]
+
 #CSS styles
 CSS = """
 
@@ -89,6 +99,9 @@ def main():
 
     # Display the image using Streamlit
     st.image(img, width=65)
+    
+    #get the date to keep track of most recent call from mongo
+    now = datetime.now()
 
     if st.button('Click to record audio'):
         st.write("Say your mood...")
@@ -99,9 +112,10 @@ def main():
             print(return_flag)
 
             if return_flag != -1:
+                OUTPUTS.insert_one({"name": txt, "createdAt": now})
                 st.write("Recommending ", genre, " songs")
             else:
-                st.write('Choose an available genre!')
+                st.write('Please try again!')
 
             return return_flag
         else:
