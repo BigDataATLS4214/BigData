@@ -48,6 +48,19 @@ p {
 }
 """
 
+button_style = """
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 70px;
+    background: rgba(163, 101, 109, 0.5);
+    box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
+    font-family: Caraque Regular Melted, cursive;
+    font-size: 25px;
+    margin-bottom: 1vw;
+"""
+
+
 # Hide the navigation menu and "Made with Streamlit" footer
 hide_menu_css_style = """
         <style>
@@ -95,13 +108,15 @@ def main():
     image_path = os.path.join(cwd, 'microphone-solid.png')
 
     # Open the image using PIL
-    img = Image.open(image_path)
+    # img = Image.open(image_path)
 
     # Display the image using Streamlit
-    st.image(img, width=65)
+    # st.image(img, width=25)
     
     #get the date to keep track of most recent call from mongo
     now = datetime.now()
+    st.write('<style>div.stButton > button:first-child { %s }</style>' % button_style, unsafe_allow_html=True)
+    
 
     if st.button('Click to record audio'):
         st.write("Say your mood...")

@@ -6,10 +6,14 @@
 	align-items:stretch; /*flex-end, center, stretch, baseline*/
 }
 .center{
+    display: flex;
+    flex-direction: column;
     margin-right: auto;
     margin-left: auto;
     width: 50%;
     text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 .header-font{
     font-family: Caraque Regular Melted, cursive; 
