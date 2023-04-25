@@ -78,7 +78,7 @@ function App() {
 
   return (
     <div>
-      {(sessionToken !== "" && page !== 'spotifyConnect') ? <NavBar setPage={setPage} /> : null}
+      {(sessionToken !== "" && page !== 'spotifyConnect') ? <NavBar page={page} setPage={setPage} /> : null}
       {sessionToken === "" ? <SpotifyConnect setSessionToken={setSessionToken}/> : null}
       {(sessionToken !== "" && page === 'home') ? <Home setPage={setPage} setPreviousPage={setPreviousPage} setEmotion={setEmotion} /> : null}
       {(sessionToken !== "" && page === 'playlists') ? <Playlists sessionToken={sessionToken} emotion = {emotion} happyPlaylistIds = {happyplaylistids} neutralPlaylistIds = {neutralplaylistids} sadPlaylistIds = {sadplaylistids} angryPlaylistIds = {angryplaylistids} surprisedPlaylistIds = {surprisedplaylistids} previousPage = {previouspage}/> : null}
