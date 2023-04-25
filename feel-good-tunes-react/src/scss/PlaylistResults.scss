@@ -32,7 +32,9 @@
 }
 
 .playlist-item{
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 29%;
     padding: 2%;
     margin: 2%;
@@ -40,12 +42,17 @@
 
 .albumIMGContainer{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    width: 70%;
+    cursor: pointer;
+    background-color: #949270;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
 }
 .albumIMG{
     width: 100%;
     border-radius: 16px;
-
 }
 
 .playlistName{

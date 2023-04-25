@@ -68,11 +68,11 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
       const results = await Promise.all(promises);
 
       const playlistsWithDurations = [];
-      let totalDurationMs = 0;
       let earliestReleaseYear = 9999; // set to a high number to find the earliest year
       let latestReleaseYear = 0; // set to 0 to find the latest year
       //Get the track information such as duration of the playlists
       for (let playlist of results) {
+        let totalDurationMs = 0;
         const playlistPopularity = playlist.data.tracks.items.reduce((totalPopularity, track) => {
           return totalPopularity + track.track.popularity;
         }, 0);
