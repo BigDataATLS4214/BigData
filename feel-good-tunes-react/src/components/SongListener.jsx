@@ -89,34 +89,54 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
           })
         );
       const results = await Promise.all(promises);
+
       const playlistsWithDurations = [];
       let totalDurationMs = 0;
+      let earliestReleaseYear = 9999; // set to a high number to find the earliest year
+      let latestReleaseYear = 0; // set to 0 to find the latest year
       //Get the track information such as duration of the playlists
       for (let playlist of results) {
-          const tracks = playlist.data.tracks.items;
-          //get the duration of every track in the playlist and add it to the total
-          const authors = new Set();
-          for (let track of tracks) {
-            totalDurationMs += track.track.duration_ms;
-            for (let author of track.track.artists) {
-              authors.add(author.name);
-            }
-          }
-
-          const duration = calculateDuration(totalDurationMs);
-          //set up new json with the added duration to the playlist information
-          const playlistWithDuration = {
-            ...playlist.data,
-            duration: duration,
-            numAuthors: authors.size,
-          };
-          console.log("PLAYLIST WITH DURATION " + playlistWithDuration)
-          playlistsWithDurations.push(playlistWithDuration);
-        }
+        const playlistPopularity = playlist.data.tracks.items.reduce((totalPopularity, track) => {
+          return totalPopularity + track.track.popularity;
+        }, 0);
         
-        setPlaylist(playlistsWithDurations);
-        //Get the track information such as duration of the playlists END
-        setPlaylistID(0); //Start off playing the first playlist
+        const averagePopularity = Math.round(playlistPopularity / playlist.data.tracks.items.length);
+
+        const tracks = playlist.data.tracks.items;
+        //get the duration of every track in the playlist and add it to the total
+        const authors = new Set();
+        for (let track of tracks) {
+          totalDurationMs += track.track.duration_ms;
+          for (let author of track.track.artists) {
+            authors.add(author.name);
+          }
+        //Figuring out when the earliest song in the playlist was made and the most recent
+        const releaseYear = parseInt(track.track.album.release_date.slice(0, 4)); // extract the release year from the release date
+        if (releaseYear < earliestReleaseYear) {
+          earliestReleaseYear = releaseYear;
+        }
+        if (releaseYear > latestReleaseYear) {
+          latestReleaseYear = releaseYear;
+        }
+    }
+
+        const duration = calculateDuration(totalDurationMs);
+        //set up new json with the added duration to the playlist information
+        const playlistWithDuration = {
+          ...playlist.data,
+          duration: duration,
+          numAuthors: authors.size,
+          averagePopularity: averagePopularity,
+          earliestReleaseYear: earliestReleaseYear,
+          latestReleaseYear: latestReleaseYear
+        };
+        console.log("PLAYLIST WITH DURATION " + playlistWithDuration)
+        playlistsWithDurations.push(playlistWithDuration);
+      }
+      
+      setPlaylist(playlistsWithDurations);
+      //Get the track information such as duration of the playlists END
+      setPlaylistID(0); //Start off playing the first playlist
     }
 
 
@@ -131,6 +151,8 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
                     <p className='music-player-details-text'>{playlist[playlistID].tracks.total} Songs</p>
                     <p className='music-player-details-text'>{playlist[playlistID].numAuthors} Authors</p>
                     <p className='music-player-details-text'> Duration: {playlist[playlistID].duration}</p>
+                    <p className='music-player-details-text'> The average popularity of tracks in the playlist is {playlist[playlistID].averagePopularity}/100.</p>
+                    <p className='music-player-details-text'> This playlist features songs from as early as {playlist[playlistID].earliestReleaseYear} to as recent as {playlist[playlistID].latestReleaseYear}.</p>
                     <SpotifyPlayer
                         token={sessionToken}
                         uris={[`spotify:playlist:${playlist[playlistID].id}`]}
