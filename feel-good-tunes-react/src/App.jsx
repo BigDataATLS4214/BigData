@@ -7,6 +7,7 @@ import { Playlists } from "./pages/Playlists";
 import { NavBar } from "./components/NavBar";
 import { SpotifyConnect } from './components/SpotifyConnect';
 import { Cam } from './pages/Cam';
+import { Mic } from './pages/Mic';
 
 function App() {
   const [page, setPage] = useState('home');
@@ -82,6 +83,7 @@ function App() {
       {(sessionToken !== "" && page === 'home') ? <Home setPage={setPage} setPreviousPage={setPreviousPage} setEmotion={setEmotion} /> : null}
       {(sessionToken !== "" && page === 'playlists') ? <Playlists sessionToken={sessionToken} emotion = {emotion} happyPlaylistIds = {happyplaylistids} sadPlaylistIds = {sadplaylistids} angryPlaylistIds = {angryplaylistids} surprisedPlaylistIds = {surprisedplaylistids} previousPage = {previouspage}/> : null}
       {(sessionToken !== "" && page === 'scanMood' )? <Cam setPage={setPage} setPreviousPage={setPreviousPage}/> : null}
+      {(sessionToken !== "" && page === 'sayMood' )? <Mic setPage={setPage} setPreviousPage={setPreviousPage}/> : null}
     </div>
   );
 }

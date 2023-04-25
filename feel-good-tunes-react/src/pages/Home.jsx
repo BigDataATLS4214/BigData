@@ -27,6 +27,9 @@ export const Home = ({setPage, setPreviousPage, setEmotion}) => {
   const renderOnlyCam = () => {
     setPage('scanMood');
   }
+  const renderOnlyMic = () => {
+    setPage('sayMood');
+  }
     return(
       <div className='home-container'>
         <div className='half-page-left'>
@@ -39,7 +42,7 @@ export const Home = ({setPage, setPreviousPage, setEmotion}) => {
         <button onClick = {() => renderOnlyCam()} className='scan-mood-button'>Scan Mood <img src = {face} className='button-icon-size' alt="Happy Icon"/></button>
         </div>
         <div className='half-page-right'>
-        <button className='scan-mood-button'>Say Mood <img src = {microphone} className='button-icon-size' alt="Microphone Icon"/></button>
+        <button onClick = {() => renderOnlyMic()} className='scan-mood-button'>Say Mood <img src = {microphone} className='button-icon-size' alt="Microphone Icon"/></button>
         </div>
         <div className = 'emotions'>
           <h2 className='checkout-emotions'>Wanna check out a different playlist? Click on an emotion below!</h2>

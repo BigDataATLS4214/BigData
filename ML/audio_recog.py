@@ -78,7 +78,16 @@ def checkText(mytxt):
         return -1, ''
 
 def main():
-    img = Image.open('microphone-solid.png')
+    # Get the current working directory
+    cwd = os.getcwd()
+
+    # Specify the image path relative to the current working directory
+    image_path = os.path.join(cwd, 'microphone-solid.png')
+
+    # Open the image using PIL
+    img = Image.open(image_path)
+
+    # Display the image using Streamlit
     st.image(img, width=65)
 
     if st.button('Click to record audio'):

@@ -1,8 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
-import Webcam from "react-webcam";
 import '../scss/Webcam.scss';
 
-export const Cam = ({setPage, setPreviousPage}) => {
+export const Mic = ({setPage, setPreviousPage}) => {
 
     const goToPlaylists = event => {
         setPage('playlists')
