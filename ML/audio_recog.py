@@ -80,9 +80,9 @@ def get_audio():
                 txt = r.recognize_google(audio)
                 return txt
             except:
-                st.write('Audio not recognized. Try again!')
+                st.write(f"<div style='text-align:center;'>Audio not recognized. Try again!</div>", unsafe_allow_html=True)
         else:
-            st.write('Audio not recognized. Try again!')
+            st.write(f"<div style='text-align:center;'>Audio not recognized. Try again!</div>", unsafe_allow_html=True)
 
 
 def checkText(mytxt):
@@ -93,7 +93,7 @@ def checkText(mytxt):
         return 2, 'sad'
     elif 'angry' in mytxt:
         return 3, 'angry'
-    elif 'surprise' in mytxt:
+    elif 'surprised' in mytxt:
         return 4, 'surprise'
     elif 'neutral' in mytxt:
         return 5, 'neutral'
@@ -119,7 +119,7 @@ def main():
     
 
     if st.button('Click to record audio'):
-        st.write("Say your mood...")
+        st.write(f"<div style='text-align:center;'>Say your mood (happy, sad, angry, surprised, neutral)</div>", unsafe_allow_html=True)
         txt = get_audio()
         print(txt)
         if txt:
@@ -128,13 +128,13 @@ def main():
 
             if return_flag != -1:
                 OUTPUTS.insert_one({"name": txt, "createdAt": now})
-                st.write("Recommending ", genre, " songs")
+                st.write(f"<div style='text-align:center;'><b>{genre}</b> confirmed </div>", unsafe_allow_html=True)
             else:
-                st.write('Please try again!')
+                st.write(f"<div style='text-align:center;'>Please try again!</div>", unsafe_allow_html=True)
 
             return return_flag
         else:
-            st.write("Say your mood...")
+           st.write(f"<div style='text-align:center;'>Say your mood (happy, sad, angry, surprised, neutral)</div>", unsafe_allow_html=True)
             
 
 main()
