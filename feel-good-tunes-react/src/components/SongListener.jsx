@@ -95,8 +95,12 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
       for (let playlist of results) {
           const tracks = playlist.data.tracks.items;
           //get the duration of every track in the playlist and add it to the total
+          const authors = new Set();
           for (let track of tracks) {
             totalDurationMs += track.track.duration_ms;
+            for (let author of track.track.artists) {
+              authors.add(author.name);
+            }
           }
 
           const duration = calculateDuration(totalDurationMs);
@@ -104,6 +108,7 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
           const playlistWithDuration = {
             ...playlist.data,
             duration: duration,
+            numAuthors: authors.size,
           };
           console.log("PLAYLIST WITH DURATION " + playlistWithDuration)
           playlistsWithDurations.push(playlistWithDuration);
@@ -124,6 +129,7 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
                 {playlist !== "" && <div className='music-player-controls'>
                     {<h2 className='music-player-detail-header'>{playlist[playlistID].name}</h2>}
                     <p className='music-player-details-text'>{playlist[playlistID].tracks.total} Songs</p>
+                    <p className='music-player-details-text'>{playlist[playlistID].numAuthors} Authors</p>
                     <p className='music-player-details-text'> Duration: {playlist[playlistID].duration}</p>
                     <SpotifyPlayer
                         token={sessionToken}
