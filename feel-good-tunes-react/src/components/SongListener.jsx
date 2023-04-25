@@ -24,7 +24,7 @@ const calculateDuration = (durationMs) => {
     return `${hours}h ${minutes}m ${seconds}s`;
   };
 
-export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, angryPlaylistIds, surprisedPlaylistIds,  emotion, previousPage}) => {
+export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, neutralPlaylistIds, angryPlaylistIds, surprisedPlaylistIds,  emotion, previousPage}) => {
     const [playlist, setPlaylist] = useState("");
     const [playlistID, setPlaylistID] = useState("");
 
@@ -64,6 +64,7 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, an
             console.log("Current EMOTION: "  + response.data.name)
             var emotionSyncedPlaylistId;
             if (response.data.name === "happy") { emotionSyncedPlaylistId = happyPlaylistIds}
+            else if (response.data.name === "neutral") { emotionSyncedPlaylistId = neutralPlaylistIds }
             else if (response.data.name === "sad") { emotionSyncedPlaylistId = sadPlaylistIds }
             else if (response.data.name === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
             else if (response.data.name === "surprise" || response.data.name === "surprised") { emotionSyncedPlaylistId = surprisedPlaylistIds}
@@ -78,6 +79,7 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, an
       {
         var emotionSyncedPlaylistId;
         if (emotion === "happy") { emotionSyncedPlaylistId = happyPlaylistIds}
+        else if (emotion === "neutral") { emotionSyncedPlaylistId = neutralPlaylistIds}
         else if (emotion === "sad") { emotionSyncedPlaylistId = sadPlaylistIds }
         else if (emotion === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
         else if (emotion === "surprise") { emotionSyncedPlaylistId = surprisedPlaylistIds}
