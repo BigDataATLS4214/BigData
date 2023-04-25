@@ -74,7 +74,7 @@ st.markdown(f'<style>{CSS}</style>', unsafe_allow_html=True)
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        audio = r.listen(source, timeout=5, phrase_time_limit=5)
+        audio = r.listen(source, timeout=2, phrase_time_limit=2)
         if audio:
             try:
                 txt = r.recognize_google(audio)
