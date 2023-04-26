@@ -142,4 +142,3 @@ Werkzeug
 wrapt
 wsproto
 zipp
-bash setup.sh
