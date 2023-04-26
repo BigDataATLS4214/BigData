@@ -130,14 +130,22 @@ class EmotionProcessor:
 			pred = label[np.argmax(model.predict(lst))]
    			
 			print(pred)
-			cv2.putText(frm, pred, (50,50),cv2.FONT_ITALIC, 1, (0,0,0),2)
+			cv2.putText(frm, pred.capitalize(), (300,100),cv2.FONT_ITALIC, 1, (0,0,0),2)
 
 			np.save("emotion.npy", np.array([pred]))
 
 			
-		# drawing.draw_landmarks(frm, res.face_landmarks, holistic.FACEMESH_TESSELATION,
-		# 						landmark_drawing_spec=drawing.DrawingSpec(color=(0,0,255), thickness=-1, circle_radius=1),
-		# 						connection_drawing_spec=drawing.DrawingSpec(thickness=1))
+			drawing.draw_landmarks(
+									frm, 
+									res.face_landmarks, 
+									holistic.FACEMESH_CONTOURS, #alot of options here to make it look better holistic.FACEMESH_TESSELATION
+									landmark_drawing_spec=drawing.DrawingSpec(
+										color=(200, 200, 200),  # Light gray color
+										thickness=1,  # Line thickness
+										circle_radius=1),  # Circle radius for each landmark point
+									connection_drawing_spec=drawing.DrawingSpec(
+										color=(255, 255, 153),  # Pale yellow color
+										thickness=1))  # Line thickness for landmark connections
 		# drawing.draw_landmarks(frm, res.left_hand_landmarks, hands.HAND_CONNECTIONS)
 		# drawing.draw_landmarks(frm, res.right_hand_landmarks, hands.HAND_CONNECTIONS)
 
