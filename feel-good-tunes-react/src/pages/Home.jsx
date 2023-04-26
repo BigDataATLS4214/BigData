@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import profile from '../img/profile-picture.png';
+import profile from '../img/profile-pic2.png';
 import happy from '../img/happy-icon.png';
 import sad from '../img/sad-icon.png';
 import angry from '../img/angry-icon.png';
