@@ -13,7 +13,7 @@ export const SpotifyConnect = ( {setSessionToken} ) => {
 
   // Spotify API CONNECTION
   const CLIENT_ID = "299b99d63f61494e86ebc0716e207405";
-  const REDIRECT_URI = "http://localhost:3000";
+  const REDIRECT_URI = "https://playlist-genie.vercel.app/";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
   const RESPONSE_TYPE = "token"
 
