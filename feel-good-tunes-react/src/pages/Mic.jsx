@@ -3,7 +3,7 @@ import '../scss/Webcam.scss';
 import axios from "axios";
 
 const PORT_NUM = 8000; //change this to your port number!
-const mongoDBURI = 'http://localhost:' + PORT_NUM;
+const mongoDBURI = 'https://big-data-alpha.vercel.app';
 
 export const Mic = ({setPage, setPreviousPage, setEmotion}) => {
 
