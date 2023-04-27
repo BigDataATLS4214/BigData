@@ -8,8 +8,6 @@ const mongoDBURI = 'https://big-data-alpha.vercel.app';
 export const Cam = ({setPage, setPreviousPage , setEmotion}) => {
 
     const goToPlaylists = event => {
-        setPage('playlists');
-        setPreviousPage('ML');
         axios.get(mongoDBURI + '/Output/')
           .then(response => {
             console.log("Current EMOTION: "  + response.data.name)
@@ -18,6 +16,8 @@ export const Cam = ({setPage, setPreviousPage , setEmotion}) => {
             else if (response.data.name === "sad") { setEmotion('sad')}
             else if (response.data.name === "angry") { setEmotion('angry') }
             else if (response.data.name === "surprise" || response.data.name === "surprised") { setEmotion('surprise')}
+            setPage('playlists');
+            setPreviousPage('ML'); //Had to move these in here since the emotion was one behind as the page was rendering the other emotion before the correct emotion was gained from mongodb
           })
           .catch((error) => {
             console.log(error);

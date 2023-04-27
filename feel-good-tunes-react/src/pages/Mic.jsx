@@ -8,8 +8,6 @@ const mongoDBURI = 'https://big-data-alpha.vercel.app';
 export const Mic = ({setPage, setPreviousPage, setEmotion}) => {
 
     const goToPlaylists = event => {
-        setPage('playlists')
-        setPreviousPage('ML')
         axios.get(mongoDBURI + '/Output/')
           .then(response => {
             console.log("Current EMOTION: "  + response.data.name)
@@ -18,6 +16,8 @@ export const Mic = ({setPage, setPreviousPage, setEmotion}) => {
             else if (response.data.name === "sad") { setEmotion('sad')}
             else if (response.data.name === "angry") { setEmotion('angry') }
             else if (response.data.name === "surprise" || response.data.name === "surprised") { setEmotion('surprise')}
+            setPage('playlists')
+            setPreviousPage('ML')
           })
           .catch((error) => {
             console.log(error);

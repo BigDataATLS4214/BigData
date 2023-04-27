@@ -42,6 +42,7 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
 
     //When the playlist page is first loaded we will want to get the correct playlists based on the current emotion and load them in
     useEffect(() => {
+      console.log("EMOTION IN SONG LISTENER: " + emotion )
       setloaded(false);
       var emotionSyncedPlaylistId;
       if (emotion === "happy") { emotionSyncedPlaylistId = happyPlaylistIds}
@@ -50,8 +51,7 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
       else if (emotion === "angry") { emotionSyncedPlaylistId = angryPlaylistIds }
       else if (emotion === "surprise") { emotionSyncedPlaylistId = surprisedPlaylistIds}
       else{emotionSyncedPlaylistId = happyPlaylistIds}//if ended up on this page from nav bar just default emotion to happy
-      searchPlaylistsID(emotionSyncedPlaylistId).then(setloaded(true))
-      
+      searchPlaylistsID(emotionSyncedPlaylistId)
     }, []);
     
     
@@ -63,7 +63,7 @@ export const SongListener = ({sessionToken, happyPlaylistIds, sadPlaylistIds, ne
             headers: {
               Authorization: `Bearer ${sessionToken}`,
             },
-          })
+          }).then(setloaded(true))
         );
       const results = await Promise.all(promises);
 
